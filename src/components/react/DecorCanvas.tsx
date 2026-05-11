@@ -35,6 +35,7 @@ import {
 import {
   ASPECT,
   ASSET_BASE_MASK,
+  MOBILE_KEEP_EVERY_N,
   PARALLAX_Y,
   REFERENCE_VIEWPORT_H,
   SKIP_ITEMS,
@@ -50,6 +51,7 @@ import {
   type Vec2,
   type Viewport,
 } from './sky-types';
+import { useIsMobile } from '~/lib/use-is-mobile';
 
 extend({ Container, Sprite });
 
@@ -69,17 +71,28 @@ interface Props {
  *  slightly exceed) the largest on-screen sprite size so there's no
  *  upscale blur.
  *
- *  Capped at 3 to keep GPU memory in check — the biggest mountain
+ *  Desktop cap is 3 to keep GPU memory in check — the biggest mountain
  *  (~5500 CSS px) accepts a mild ~1.25× upscale from a 1456×3 texture,
  *  which is imperceptible on stylized silhouettes. Without this cap a
- *  perfect-fit texture for mountain_5 would be ~76 MB on its own. */
+ *  perfect-fit texture for mountain_5 would be ~76 MB on its own.
+ *
+ *  Mobile cap is 1 (no oversampling at all): on iPhone the page process
+ *  gets killed under GPU pressure long before the upscale blur is
+ *  noticeable on a 6-inch screen with cartoon silhouettes. Drops mountain
+ *  textures from ~43 MB to ~4.7 MB each. */
 const MAX_RESOLUTION = 3;
-function svgResolutionFor(id: DecorAsset, maxRenderWidth: number): number {
+const MOBILE_MAX_RESOLUTION = 1;
+function svgResolutionFor(
+  id: DecorAsset,
+  maxRenderWidth: number,
+  mobile: boolean
+): number {
+  const cap = mobile ? MOBILE_MAX_RESOLUTION : MAX_RESOLUTION;
   const ratio = maxRenderWidth / VIEWBOX_W[id];
-  return Math.max(1, Math.min(MAX_RESOLUTION, Math.ceil(ratio)));
+  return Math.max(1, Math.min(cap, Math.ceil(ratio)));
 }
 
-function useTextures(layers: DecorLayerData[]) {
+function useTextures(layers: DecorLayerData[], mobile: boolean) {
   const [textures, setTextures] = useState<Record<string, Texture> | null>(
     null
   );
@@ -107,7 +120,7 @@ function useTextures(layers: DecorLayerData[]) {
           data: {
             width: w,
             height: h,
-            resolution: svgResolutionFor(id, maxWidth),
+            resolution: svgResolutionFor(id, maxWidth, mobile),
           },
         });
         return [id, tex] as const;
@@ -118,7 +131,7 @@ function useTextures(layers: DecorLayerData[]) {
     return () => {
       cancelled = true;
     };
-  }, [layers]);
+  }, [layers, mobile]);
 
   return textures;
 }
@@ -205,6 +218,7 @@ interface LayerProps {
   scaleY: number;
   textures: Record<string, Texture>;
   reducedMotion: boolean;
+  mobile: boolean;
 }
 
 function ParallaxLayer({
@@ -215,6 +229,7 @@ function ParallaxLayer({
   scaleY,
   textures,
   reducedMotion,
+  mobile,
 }: LayerProps) {
   const parallaxX = layer.parallax;
   const parallaxY = PARALLAX_Y[layer.id] ?? 0;
@@ -228,6 +243,10 @@ function ParallaxLayer({
   // mountains/clouds positioned outside their parallax-shifted band are
   // never visible at any camera position — those are filtered out here so
   // they're never instantiated as sprites.
+  // On mobile, MOBILE_KEEP_EVERY_N adds a modulo-based thinning pass on
+  // top of SKIP_ITEMS (e.g. stars 138 → ~46) to keep GPU memory and
+  // per-frame paint cost within the iOS budget.
+  const mobileKeepN = mobile ? MOBILE_KEEP_EVERY_N[layer.id] : undefined;
   const renderedItems = useMemo(() => {
     const skip = SKIP_ITEMS[layer.id];
     if (viewport.w === 0 || viewport.h === 0) return [];
@@ -235,6 +254,7 @@ function ParallaxLayer({
       .map((item, i) => ({ item, i }))
       .filter(({ i, item }) => {
         if (skip?.has(i)) return false;
+        if (mobileKeepN !== undefined && i % mobileKeepN !== 0) return false;
         return isReachable(item, parallaxX, parallaxY, scaleY, viewport);
       });
   }, [
@@ -245,6 +265,7 @@ function ParallaxLayer({
     scaleY,
     viewport.w,
     viewport.h,
+    mobileKeepN,
   ]);
 
   // Per-frame: re-position the layer container (parallax), cull sprites
@@ -322,7 +343,8 @@ function DecorCanvasInner({ layers, cameraRef, viewport }: Props) {
   const viewportRef = useRef(viewport);
   viewportRef.current = viewport;
 
-  const textures = useTextures(layers);
+  const mobile = useIsMobile();
+  const textures = useTextures(layers, mobile);
   const reducedMotion = useReducedMotion();
 
   if (!textures || viewport.w === 0 || viewport.h === 0) return null;
@@ -358,6 +380,7 @@ function DecorCanvasInner({ layers, cameraRef, viewport }: Props) {
           scaleY={scaleY}
           textures={textures}
           reducedMotion={reducedMotion}
+          mobile={mobile}
         />
       ))}
     </Application>

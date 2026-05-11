@@ -130,6 +130,21 @@ export const SKIP_ITEMS: Partial<Record<string, ReadonlySet<number>>> = {
   mountains_foreground: new Set([0, 8, 13]),
 };
 
+/** Mobile-only thinning, applied on top of SKIP_ITEMS. An item at index i
+ *  is rendered only when `i % MOBILE_KEEP_EVERY_N[layer] === 0`. Tuned to
+ *  the narrow mobile viewport, where the wide-world decor density is both
+ *  unnecessary and the main driver of iOS WebKit renderer kills (GPU
+ *  texture memory + tile compositing under pan). Mountains are untouched
+ *  — they're structural, few, and already small in count.
+ *
+ *  Layers absent from this map keep all items (post-SKIP_ITEMS). */
+export const MOBILE_KEEP_EVERY_N: Partial<Record<string, number>> = {
+  stars: 3,
+  high_clouds: 2,
+  mid_clouds: 2,
+  low_clouds: 2,
+};
+
 /** Toggle per-decor-item index badges by appending `?debug=decor` to the
  *  URL. Read once at module load — a refresh applies / clears it. */
 export const DEBUG_DECOR =
