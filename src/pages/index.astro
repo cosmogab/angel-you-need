@@ -1,0 +1,113 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import SkyMap from '~/components/react/SkyMap';
+import type { SkyProject } from '~/components/react/sky-types';
+
+const entries = await getCollection('projects');
+
+// Serialise the full project data into the React island so the sky-map
+// overlay can render scene content without a separate fetch.
+const skyProjects: SkyProject[] = entries.map((entry) => ({
+  id: entry.id,
+  title: entry.data.title,
+  category: entry.data.category,
+  order: entry.data.order,
+  period: entry.data.period,
+  role: entry.data.role,
+  team: entry.data.team,
+  status: entry.data.status,
+  position: entry.data.position,
+  sky: {
+    theme: entry.data.sky.theme,
+    base: entry.data.sky.base,
+    accent: entry.data.sky.accent,
+  },
+  context: entry.data.context,
+  myRole: entry.data.myRole,
+  whatIBuilt: entry.data.whatIBuilt,
+  stack: entry.data.stack,
+  impactStats: entry.data.impactStats,
+  ambient: entry.data.ambient,
+  metaDescription: entry.data.metaDescription,
+  href: `/projects/${entry.id}`,
+}));
+---
+
+<BaseLayout
+  title="The Angel You Need — Gabriel Miro"
+  description="Interactive portfolio of Gabriel Miro, senior full-stack engineer. Seven years helping SaaS products, APIs, and AI features take flight."
+  path="/"
+  hideFooter
+  includeHomeJsonLd
+>
+  <SkyMap client:only="react" projects={skyProjects}>
+    <div slot="fallback" class="sky-fallback" aria-hidden="true">
+      <p class="sky-fallback__title font-display">The Angel You Need.</p>
+    </div>
+  </SkyMap>
+
+  <noscript>
+    <section class="noscript-list">
+      <p class="lede">
+        The sky map needs JavaScript. Here are the projects directly:
+      </p>
+      <ul>
+        {
+          skyProjects
+            .sort((a, b) => a.order - b.order)
+            .map((p) => (
+              <li>
+                <a href={p.href}>
+                  <strong>{p.title}</strong>
+                  <span>{p.category}</span>
+                </a>
+              </li>
+            ))
+        }
+      </ul>
+    </section>
+  </noscript>
+</BaseLayout>
+
+<style>
+  .sky-fallback {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .sky-fallback__title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    color: var(--ink);
+    opacity: 0.55;
+  }
+  .noscript-list {
+    position: relative;
+    z-index: 2;
+    max-width: 40rem;
+    margin: 6rem auto 2rem;
+    padding: 2rem;
+    background: var(--cream);
+    border-radius: 1rem;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+  .noscript-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .noscript-list a {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background: color-mix(in srgb, var(--sky-base) 18%, transparent);
+    text-decoration: none;
+    color: var(--ink);
+  }
+</style>

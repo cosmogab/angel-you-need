@@ -1,0 +1,62 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact — Gabriel Miro"
+  description="Get in touch with Gabriel Miro — senior full-stack engineer open to senior, lead, and freelance roles."
+  path="/contact"
+>
+  <article class="contact scene-content">
+    <header class="scene-header">
+      <p class="ink-eyebrow">Contact</p>
+      <h1 class="ink-title">Let's talk.</h1>
+    </header>
+
+    <section class="ink-card">
+      <p class="ink-card__body">
+        Open to senior, lead, and freelance engagements. The best way to
+        reach me is email — I reply within a day.
+      </p>
+    </section>
+
+    <section class="contact-links" aria-label="Reach Gabriel">
+      <a class="ink-chip ink-chip--with-icon" href="mailto:gabriel.34.miro@gmail.com">
+        <img
+          src="https://api.iconify.design/mdi/email-outline.svg?color=%231A1613"
+          alt=""
+          width="16"
+          height="16"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        />
+        gabriel.34.miro@gmail.com
+      </a>
+      <a
+        class="ink-chip ink-chip--with-icon"
+        href="https://www.linkedin.com/in/gabriel-miro-972b1a2b3"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="https://api.iconify.design/simple-icons/linkedin.svg?color=%231A1613"
+          alt=""
+          width="16"
+          height="16"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        />
+        LinkedIn
+      </a>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+</style>

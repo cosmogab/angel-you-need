@@ -1,0 +1,1754 @@
+{
+  "canvas": {
+    "width": 16000,
+    "height": 11200,
+    "background_color": "#B5DCEB"
+  },
+  "layers": [
+    {
+      "id": "stars",
+      "parallax": 0.05,
+      "animations": [
+        "twinkle"
+      ],
+      "items": [
+        {
+          "asset": "star_06",
+          "x": 10476,
+          "y": 536,
+          "width": 35,
+          "color": "#FFFFFF",
+          "opacity": 0.897
+        },
+        {
+          "asset": "star_06",
+          "x": 4012,
+          "y": 994,
+          "width": 39,
+          "color": "#FFFFFF",
+          "opacity": 0.895
+        },
+        {
+          "asset": "star_06",
+          "x": 11087,
+          "y": 436,
+          "width": 53,
+          "color": "#FFFFFF",
+          "opacity": 0.769
+        },
+        {
+          "asset": "star_06",
+          "x": 488,
+          "y": 463,
+          "width": 41,
+          "color": "#FFFFFF",
+          "opacity": 0.693
+        },
+        {
+          "asset": "star_06",
+          "x": 9863,
+          "y": 188,
+          "width": 52,
+          "color": "#FFFFFF",
+          "opacity": 0.68
+        },
+        {
+          "asset": "star_06",
+          "x": 10647,
+          "y": 1798,
+          "width": 42,
+          "color": "#FFFFFF",
+          "opacity": 0.78
+        },
+        {
+          "asset": "star_06",
+          "x": 4557,
+          "y": 106,
+          "width": 59,
+          "color": "#FFFFFF",
+          "opacity": 0.922
+        },
+        {
+          "asset": "star_06",
+          "x": 11438,
+          "y": 1811,
+          "width": 45,
+          "color": "#FFFFFF",
+          "opacity": 0.711
+        },
+        {
+          "asset": "star_06",
+          "x": 3527,
+          "y": 1458,
+          "width": 38,
+          "color": "#FFFFFF",
+          "opacity": 0.637
+        },
+        {
+          "asset": "star_06",
+          "x": 1584,
+          "y": 1550,
+          "width": 62,
+          "color": "#FFFFFF",
+          "opacity": 0.738
+        },
+        {
+          "asset": "star_06",
+          "x": 4333,
+          "y": 257,
+          "width": 58,
+          "color": "#FFFFFF",
+          "opacity": 0.784
+        },
+        {
+          "asset": "star_06",
+          "x": 2045,
+          "y": 1630,
+          "width": 37,
+          "color": "#FFFFFF",
+          "opacity": 0.821
+        },
+        {
+          "asset": "star_06",
+          "x": 13588,
+          "y": 1561,
+          "width": 53,
+          "color": "#FFFFFF",
+          "opacity": 0.677
+        },
+        {
+          "asset": "star_06",
+          "x": 1139,
+          "y": 267,
+          "width": 56,
+          "color": "#FFFFFF",
+          "opacity": 0.691
+        },
+        {
+          "asset": "star_06",
+          "x": 4741,
+          "y": 406,
+          "width": 62,
+          "color": "#FFFFFF",
+          "opacity": 0.693
+        },
+        {
+          "asset": "star_06",
+          "x": 1654,
+          "y": 1636,
+          "width": 43,
+          "color": "#FFFFFF",
+          "opacity": 0.781
+        },
+        {
+          "asset": "star_06",
+          "x": 13666,
+          "y": 1574,
+          "width": 40,
+          "color": "#FFFFFF",
+          "opacity": 0.748
+        },
+        {
+          "asset": "star_06",
+          "x": 3432,
+          "y": 1173,
+          "width": 57,
+          "color": "#FFFFFF",
+          "opacity": 0.975
+        },
+        {
+          "asset": "star_06",
+          "x": 10617,
+          "y": 372,
+          "width": 54,
+          "color": "#FFFFFF",
+          "opacity": 0.854
+        },
+        {
+          "asset": "star_06",
+          "x": 8751,
+          "y": 1082,
+          "width": 40,
+          "color": "#FFFFFF",
+          "opacity": 0.785
+        },
+        {
+          "asset": "star_06",
+          "x": 4422,
+          "y": 979,
+          "width": 56,
+          "color": "#FFFFFF",
+          "opacity": 0.73
+        },
+        {
+          "asset": "star_06",
+          "x": 12588,
+          "y": 309,
+          "width": 42,
+          "color": "#FFFFFF",
+          "opacity": 0.929
+        },
+        {
+          "asset": "star_06",
+          "x": 13189,
+          "y": 1372,
+          "width": 47,
+          "color": "#FFFFFF",
+          "opacity": 0.707
+        },
+        {
+          "asset": "star_06",
+          "x": 3456,
+          "y": 1368,
+          "width": 41,
+          "color": "#FFFFFF",
+          "opacity": 0.862
+        },
+        {
+          "asset": "star_06",
+          "x": 6482,
+          "y": 1959,
+          "width": 39,
+          "color": "#FFFFFF",
+          "opacity": 0.706
+        },
+        {
+          "asset": "star_06",
+          "x": 4040,
+          "y": 1156,
+          "width": 58,
+          "color": "#FFFFFF",
+          "opacity": 0.834
+        },
+        {
+          "asset": "star_06",
+          "x": 14709,
+          "y": 1715,
+          "width": 46,
+          "color": "#FFFFFF",
+          "opacity": 0.688
+        },
+        {
+          "asset": "star_06",
+          "x": 2266,
+          "y": 2101,
+          "width": 37,
+          "color": "#FFFFFF",
+          "opacity": 0.902
+        },
+        {
+          "asset": "star_06",
+          "x": 14108,
+          "y": 529,
+          "width": 39,
+          "color": "#FFFFFF",
+          "opacity": 0.851
+        },
+        {
+          "asset": "star_06",
+          "x": 12977,
+          "y": 1809,
+          "width": 54,
+          "color": "#FFFFFF",
+          "opacity": 0.625
+        },
+        {
+          "asset": "star_06",
+          "x": 6252,
+          "y": 1997,
+          "width": 51,
+          "color": "#FFFFFF",
+          "opacity": 0.701
+        },
+        {
+          "asset": "star_06",
+          "x": 9064,
+          "y": 127,
+          "width": 56,
+          "color": "#FFFFFF",
+          "opacity": 0.888
+        },
+        {
+          "asset": "star_06",
+          "x": 11169,
+          "y": 1172,
+          "width": 59,
+          "color": "#FFFFFF",
+          "opacity": 0.856
+        },
+        {
+          "asset": "star_06",
+          "x": 1827,
+          "y": 1282,
+          "width": 48,
+          "color": "#FFFFFF",
+          "opacity": 0.663
+        },
+        {
+          "asset": "star_06",
+          "x": 53,
+          "y": 1158,
+          "width": 51,
+          "color": "#FFFFFF",
+          "opacity": 0.905
+        },
+        {
+          "asset": "star_06",
+          "x": 8317,
+          "y": 515,
+          "width": 62,
+          "color": "#FFFFFF",
+          "opacity": 0.85
+        },
+        {
+          "asset": "star_06",
+          "x": 13789,
+          "y": 2159,
+          "width": 54,
+          "color": "#FFFFFF",
+          "opacity": 0.68
+        },
+        {
+          "asset": "star_06",
+          "x": 6126,
+          "y": 741,
+          "width": 52,
+          "color": "#FFFFFF",
+          "opacity": 0.981
+        },
+        {
+          "asset": "star_06",
+          "x": 15113,
+          "y": 82,
+          "width": 54,
+          "color": "#FFFFFF",
+          "opacity": 0.73
+        },
+        {
+          "asset": "star_06",
+          "x": 319,
+          "y": 538,
+          "width": 64,
+          "color": "#FFFFFF",
+          "opacity": 0.745
+        },
+        {
+          "asset": "star_06",
+          "x": 13626,
+          "y": 1339,
+          "width": 42,
+          "color": "#FFFFFF",
+          "opacity": 0.623
+        },
+        {
+          "asset": "star_06",
+          "x": 14385,
+          "y": 402,
+          "width": 37,
+          "color": "#FFFFFF",
+          "opacity": 0.893
+        },
+        {
+          "asset": "star_06",
+          "x": 13369,
+          "y": 363,
+          "width": 59,
+          "color": "#FFFFFF",
+          "opacity": 0.813
+        },
+        {
+          "asset": "star_06",
+          "x": 2060,
+          "y": 605,
+          "width": 56,
+          "color": "#FFFFFF",
+          "opacity": 0.79
+        },
+        {
+          "asset": "star_06",
+          "x": 9007,
+          "y": 756,
+          "width": 43,
+          "color": "#FFFFFF",
+          "opacity": 0.811
+        },
+        {
+          "asset": "star_06",
+          "x": 9938,
+          "y": 1813,
+          "width": 65,
+          "color": "#FFFFFF",
+          "opacity": 0.685
+        },
+        {
+          "asset": "star_06",
+          "x": 8835,
+          "y": 903,
+          "width": 57,
+          "color": "#FFFFFF",
+          "opacity": 0.725
+        },
+        {
+          "asset": "star_06",
+          "x": 11004,
+          "y": 1609,
+          "width": 49,
+          "color": "#FFFFFF",
+          "opacity": 0.96
+        },
+        {
+          "asset": "star_06",
+          "x": 7397,
+          "y": 575,
+          "width": 42,
+          "color": "#FFFFFF",
+          "opacity": 0.69
+        },
+        {
+          "asset": "star_06",
+          "x": 5539,
+          "y": 166,
+          "width": 53,
+          "color": "#FFFFFF",
+          "opacity": 0.822
+        },
+        {
+          "asset": "star_06",
+          "x": 9641,
+          "y": 982,
+          "width": 35,
+          "color": "#FFFFFF",
+          "opacity": 0.628
+        },
+        {
+          "asset": "star_06",
+          "x": 10339,
+          "y": 321,
+          "width": 42,
+          "color": "#FFFFFF",
+          "opacity": 0.627
+        },
+        {
+          "asset": "star_06",
+          "x": 514,
+          "y": 1433,
+          "width": 37,
+          "color": "#FFFFFF",
+          "opacity": 0.806
+        },
+        {
+          "asset": "star_06",
+          "x": 4562,
+          "y": 2068,
+          "width": 41,
+          "color": "#FFFFFF",
+          "opacity": 0.816
+        },
+        {
+          "asset": "star_06",
+          "x": 11851,
+          "y": 2016,
+          "width": 42,
+          "color": "#FFFFFF",
+          "opacity": 0.914
+        },
+        {
+          "asset": "star_06",
+          "x": 13230,
+          "y": 1747,
+          "width": 41,
+          "color": "#FFFFFF",
+          "opacity": 0.638
+        },
+        {
+          "asset": "star_06",
+          "x": 10796,
+          "y": 1845,
+          "width": 46,
+          "color": "#FFFFFF",
+          "opacity": 0.769
+        },
+        {
+          "asset": "star_06",
+          "x": 7651,
+          "y": 301,
+          "width": 56,
+          "color": "#FFFFFF",
+          "opacity": 0.861
+        },
+        {
+          "asset": "star_06",
+          "x": 10587,
+          "y": 483,
+          "width": 36,
+          "color": "#FFFFFF",
+          "opacity": 0.761
+        },
+        {
+          "asset": "star_06",
+          "x": 5559,
+          "y": 527,
+          "width": 42,
+          "color": "#FFFFFF",
+          "opacity": 0.677
+        },
+        {
+          "asset": "star_06",
+          "x": 8786,
+          "y": 1917,
+          "width": 39,
+          "color": "#FFFFFF",
+          "opacity": 0.769
+        },
+        {
+          "asset": "star_06",
+          "x": 4563,
+          "y": 1974,
+          "width": 42,
+          "color": "#FFFFFF",
+          "opacity": 0.95
+        },
+        {
+          "asset": "star_06",
+          "x": 1235,
+          "y": 1895,
+          "width": 60,
+          "color": "#FFFFFF",
+          "opacity": 0.945
+        },
+        {
+          "asset": "star_06",
+          "x": 9016,
+          "y": 481,
+          "width": 36,
+          "color": "#FFFFFF",
+          "opacity": 0.861
+        },
+        {
+          "asset": "star_06",
+          "x": 8856,
+          "y": 140,
+          "width": 37,
+          "color": "#FFFFFF",
+          "opacity": 0.971
+        },
+        {
+          "asset": "star_06",
+          "x": 13905,
+          "y": 1048,
+          "width": 40,
+          "color": "#FFFFFF",
+          "opacity": 0.763
+        },
+        {
+          "asset": "star_06",
+          "x": 7886,
+          "y": 955,
+          "width": 62,
+          "color": "#FFFFFF",
+          "opacity": 0.76
+        },
+        {
+          "asset": "star_06",
+          "x": 960,
+          "y": 754,
+          "width": 47,
+          "color": "#FFFFFF",
+          "opacity": 0.601
+        },
+        {
+          "asset": "star_06",
+          "x": 6396,
+          "y": 1166,
+          "width": 64,
+          "color": "#FFFFFF",
+          "opacity": 0.914
+        },
+        {
+          "asset": "star_06",
+          "x": 7454,
+          "y": 1248,
+          "width": 48,
+          "color": "#FFFFFF",
+          "opacity": 0.879
+        },
+        {
+          "asset": "star_06",
+          "x": 11968,
+          "y": 2073,
+          "width": 39,
+          "color": "#FFFFFF",
+          "opacity": 0.676
+        },
+        {
+          "asset": "star_06",
+          "x": 3566,
+          "y": 319,
+          "width": 53,
+          "color": "#FFFFFF",
+          "opacity": 0.894
+        },
+        {
+          "asset": "star_06",
+          "x": 998,
+          "y": 1364,
+          "width": 36,
+          "color": "#FFFFFF",
+          "opacity": 0.62
+        },
+        {
+          "asset": "star_06",
+          "x": 7811,
+          "y": 2139,
+          "width": 64,
+          "color": "#FFFFFF",
+          "opacity": 0.941
+        },
+        {
+          "asset": "star_06",
+          "x": 2579,
+          "y": 312,
+          "width": 65,
+          "color": "#FFFFFF",
+          "opacity": 0.803
+        },
+        {
+          "asset": "star_06",
+          "x": 13948,
+          "y": 841,
+          "width": 37,
+          "color": "#FFFFFF",
+          "opacity": 0.838
+        },
+        {
+          "asset": "star_06",
+          "x": 11062,
+          "y": 1043,
+          "width": 47,
+          "color": "#FFFFFF",
+          "opacity": 0.648
+        },
+        {
+          "asset": "star_06",
+          "x": 14586,
+          "y": 1088,
+          "width": 53,
+          "color": "#FFFFFF",
+          "opacity": 0.838
+        },
+        {
+          "asset": "star_06",
+          "x": 10147,
+          "y": 415,
+          "width": 48,
+          "color": "#FFFFFF",
+          "opacity": 0.863
+        },
+        {
+          "asset": "star_06",
+          "x": 9260,
+          "y": 1375,
+          "width": 64,
+          "color": "#FFFFFF",
+          "opacity": 0.704
+        },
+        {
+          "asset": "star_06",
+          "x": 10972,
+          "y": 1366,
+          "width": 42,
+          "color": "#FFFFFF",
+          "opacity": 0.706
+        },
+        {
+          "asset": "star_06",
+          "x": 2144,
+          "y": 1308,
+          "width": 49,
+          "color": "#FFFFFF",
+          "opacity": 0.726
+        },
+        {
+          "asset": "star_06",
+          "x": 12318,
+          "y": 377,
+          "width": 35,
+          "color": "#FFFFFF",
+          "opacity": 0.783
+        },
+        {
+          "asset": "star_06",
+          "x": 9224,
+          "y": 489,
+          "width": 37,
+          "color": "#FFFFFF",
+          "opacity": 0.815
+        },
+        {
+          "asset": "star_06",
+          "x": 8288,
+          "y": 1166,
+          "width": 39,
+          "color": "#FFFFFF",
+          "opacity": 0.973
+        },
+        {
+          "asset": "star_06",
+          "x": 14432,
+          "y": 361,
+          "width": 63,
+          "color": "#FFFFFF",
+          "opacity": 0.698
+        },
+        {
+          "asset": "star_06",
+          "x": 4669,
+          "y": 726,
+          "width": 49,
+          "color": "#FFFFFF",
+          "opacity": 0.933
+        },
+        {
+          "asset": "star_06",
+          "x": 11526,
+          "y": 1319,
+          "width": 54,
+          "color": "#FFFFFF",
+          "opacity": 0.994
+        },
+        {
+          "asset": "star_06",
+          "x": 13223,
+          "y": 112,
+          "width": 56,
+          "color": "#FFFFFF",
+          "opacity": 0.927
+        },
+        {
+          "asset": "star_06",
+          "x": 4905,
+          "y": 504,
+          "width": 65,
+          "color": "#FFFFFF",
+          "opacity": 0.951
+        },
+        {
+          "asset": "star_06",
+          "x": 4333,
+          "y": 552,
+          "width": 63,
+          "color": "#FFFFFF",
+          "opacity": 0.643
+        },
+        {
+          "asset": "star_06",
+          "x": 9064,
+          "y": 716,
+          "width": 43,
+          "color": "#FFFFFF",
+          "opacity": 0.713
+        },
+        {
+          "asset": "star_06",
+          "x": 3450,
+          "y": 1484,
+          "width": 41,
+          "color": "#FFFFFF",
+          "opacity": 0.875
+        },
+        {
+          "asset": "star_06",
+          "x": 13974,
+          "y": 1161,
+          "width": 51,
+          "color": "#FFFFFF",
+          "opacity": 0.795
+        },
+        {
+          "asset": "star_06",
+          "x": 14833,
+          "y": 288,
+          "width": 37,
+          "color": "#FFFFFF",
+          "opacity": 0.854
+        },
+        {
+          "asset": "star_06",
+          "x": 13588,
+          "y": 1213,
+          "width": 36,
+          "color": "#FFFFFF",
+          "opacity": 0.601
+        },
+        {
+          "asset": "star_06",
+          "x": 12634,
+          "y": 615,
+          "width": 55,
+          "color": "#FFFFFF",
+          "opacity": 0.992
+        },
+        {
+          "asset": "star_06",
+          "x": 2647,
+          "y": 1889,
+          "width": 52,
+          "color": "#FFFFFF",
+          "opacity": 0.882
+        },
+        {
+          "asset": "star_06",
+          "x": 9189,
+          "y": 119,
+          "width": 38,
+          "color": "#FFFFFF",
+          "opacity": 0.63
+        },
+        {
+          "asset": "star_06",
+          "x": 14468,
+          "y": 690,
+          "width": 52,
+          "color": "#FFFFFF",
+          "opacity": 0.614
+        },
+        {
+          "asset": "star_06",
+          "x": 6049,
+          "y": 686,
+          "width": 48,
+          "color": "#FFFFFF",
+          "opacity": 0.651
+        },
+        {
+          "asset": "star_06",
+          "x": 5050,
+          "y": 1573,
+          "width": 63,
+          "color": "#FFFFFF",
+          "opacity": 0.973
+        },
+        {
+          "asset": "star_06",
+          "x": 15928,
+          "y": 243,
+          "width": 63,
+          "color": "#FFFFFF",
+          "opacity": 0.743
+        },
+        {
+          "asset": "star_06",
+          "x": 11174,
+          "y": 1102,
+          "width": 56,
+          "color": "#FFFFFF",
+          "opacity": 0.641
+        },
+        {
+          "asset": "star_06",
+          "x": 12781,
+          "y": 1744,
+          "width": 54,
+          "color": "#FFFFFF",
+          "opacity": 0.9
+        },
+        {
+          "asset": "star_06",
+          "x": 15167,
+          "y": 1049,
+          "width": 62,
+          "color": "#FFFFFF",
+          "opacity": 0.665
+        },
+        {
+          "asset": "star_06",
+          "x": 13105,
+          "y": 805,
+          "width": 63,
+          "color": "#FFFFFF",
+          "opacity": 0.765
+        },
+        {
+          "asset": "star_06",
+          "x": 2938,
+          "y": 1440,
+          "width": 60,
+          "color": "#FFFFFF",
+          "opacity": 0.972
+        },
+        {
+          "asset": "star_06",
+          "x": 13143,
+          "y": 1096,
+          "width": 43,
+          "color": "#FFFFFF",
+          "opacity": 0.664
+        },
+        {
+          "asset": "star_06",
+          "x": 11489,
+          "y": 522,
+          "width": 47,
+          "color": "#FFFFFF",
+          "opacity": 0.949
+        },
+        {
+          "asset": "star_01",
+          "x": 14067,
+          "y": 1063,
+          "width": 94,
+          "color": "#FFFFFF",
+          "opacity": 0.88
+        },
+        {
+          "asset": "star_01",
+          "x": 15047,
+          "y": 1042,
+          "width": 102,
+          "color": "#FFFFFF",
+          "opacity": 0.896
+        },
+        {
+          "asset": "star_01",
+          "x": 13030,
+          "y": 1884,
+          "width": 94,
+          "color": "#FFFFFF",
+          "opacity": 0.883
+        },
+        {
+          "asset": "star_01",
+          "x": 10813,
+          "y": 495,
+          "width": 105,
+          "color": "#FFFFFF",
+          "opacity": 0.899
+        },
+        {
+          "asset": "star_01",
+          "x": 14161,
+          "y": 242,
+          "width": 129,
+          "color": "#FFFFFF",
+          "opacity": 0.892
+        },
+        {
+          "asset": "star_01",
+          "x": 10510,
+          "y": 1143,
+          "width": 105,
+          "color": "#FFFFFF",
+          "opacity": 0.952
+        },
+        {
+          "asset": "star_01",
+          "x": 13822,
+          "y": 1198,
+          "width": 101,
+          "color": "#FFFFFF",
+          "opacity": 0.991
+        },
+        {
+          "asset": "star_01",
+          "x": 1889,
+          "y": 1896,
+          "width": 96,
+          "color": "#FFFFFF",
+          "opacity": 0.877
+        },
+        {
+          "asset": "star_01",
+          "x": 15770,
+          "y": 2114,
+          "width": 96,
+          "color": "#FFFFFF",
+          "opacity": 0.856
+        },
+        {
+          "asset": "star_01",
+          "x": 9774,
+          "y": 989,
+          "width": 102,
+          "color": "#FFFFFF",
+          "opacity": 0.959
+        },
+        {
+          "asset": "star_01",
+          "x": 5139,
+          "y": 993,
+          "width": 118,
+          "color": "#FFFFFF",
+          "opacity": 0.998
+        },
+        {
+          "asset": "star_01",
+          "x": 1894,
+          "y": 888,
+          "width": 137,
+          "color": "#FFFFFF",
+          "opacity": 0.936
+        },
+        {
+          "asset": "star_01",
+          "x": 4173,
+          "y": 190,
+          "width": 125,
+          "color": "#FFFFFF",
+          "opacity": 0.915
+        },
+        {
+          "asset": "star_01",
+          "x": 8518,
+          "y": 1995,
+          "width": 131,
+          "color": "#FFFFFF",
+          "opacity": 0.931
+        },
+        {
+          "asset": "star_01",
+          "x": 11787,
+          "y": 2025,
+          "width": 127,
+          "color": "#FFFFFF",
+          "opacity": 0.961
+        },
+        {
+          "asset": "star_01",
+          "x": 3228,
+          "y": 845,
+          "width": 107,
+          "color": "#FFFFFF",
+          "opacity": 0.86
+        },
+        {
+          "asset": "star_01",
+          "x": 10882,
+          "y": 1985,
+          "width": 101,
+          "color": "#FFFFFF",
+          "opacity": 0.943
+        },
+        {
+          "asset": "star_01",
+          "x": 10868,
+          "y": 1836,
+          "width": 87,
+          "color": "#FFFFFF",
+          "opacity": 0.958
+        },
+        {
+          "asset": "star_01",
+          "x": 4920,
+          "y": 1138,
+          "width": 99,
+          "color": "#FFFFFF",
+          "opacity": 0.95
+        },
+        {
+          "asset": "star_01",
+          "x": 5344,
+          "y": 924,
+          "width": 124,
+          "color": "#FFFFFF",
+          "opacity": 0.894
+        },
+        {
+          "asset": "star_01",
+          "x": 2085,
+          "y": 492,
+          "width": 106,
+          "color": "#FFFFFF",
+          "opacity": 0.95
+        },
+        {
+          "asset": "star_01",
+          "x": 6211,
+          "y": 1487,
+          "width": 127,
+          "color": "#FFFFFF",
+          "opacity": 0.985
+        },
+        {
+          "asset": "star_01",
+          "x": 10084,
+          "y": 1265,
+          "width": 99,
+          "color": "#FFFFFF",
+          "opacity": 0.911
+        },
+        {
+          "asset": "star_01",
+          "x": 13659,
+          "y": 100,
+          "width": 99,
+          "color": "#FFFFFF",
+          "opacity": 0.893
+        },
+        {
+          "asset": "star_01",
+          "x": 7043,
+          "y": 1709,
+          "width": 117,
+          "color": "#FFFFFF",
+          "opacity": 0.941
+        },
+        {
+          "asset": "star_01",
+          "x": 5279,
+          "y": 1052,
+          "width": 108,
+          "color": "#FFFFFF",
+          "opacity": 0.916
+        },
+        {
+          "asset": "star_01",
+          "x": 3501,
+          "y": 1146,
+          "width": 110,
+          "color": "#FFFFFF",
+          "opacity": 0.969
+        },
+        {
+          "asset": "star_01",
+          "x": 15725,
+          "y": 1730,
+          "width": 127,
+          "color": "#FFFFFF",
+          "opacity": 0.875
+        }
+      ]
+    },
+    {
+      "id": "high_clouds",
+      "parallax": 0.15,
+      "items": [
+        {
+          "asset": "cloud_2",
+          "x": 1389,
+          "y": 2821,
+          "width": 2238,
+          "color": "#D4E8F4",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_6",
+          "x": 4649,
+          "y": 2747,
+          "width": 1630,
+          "color": "#BEDEF0",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_1",
+          "x": 5491,
+          "y": 2841,
+          "width": 1447,
+          "color": "#A6D2EA",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_2",
+          "x": 8445,
+          "y": 3188,
+          "width": 1866,
+          "color": "#D4E8F4",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_5",
+          "x": 10145,
+          "y": 3126,
+          "width": 2135,
+          "color": "#A6D2EA",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_8",
+          "x": 10370,
+          "y": 2642,
+          "width": 1649,
+          "color": "#D4E8F4",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_1",
+          "x": 10876,
+          "y": 2558,
+          "width": 2314,
+          "color": "#A6D2EA",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_7",
+          "x": 2471,
+          "y": 3148,
+          "width": 1085,
+          "color": "#D4E8F4",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_1",
+          "x": 13455,
+          "y": 3437,
+          "width": 637,
+          "color": "#BEDEF0",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_7",
+          "x": 950,
+          "y": 3379,
+          "width": 898,
+          "color": "#BEDEF0",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_1",
+          "x": 7104,
+          "y": 3196,
+          "width": 644,
+          "color": "#BEDEF0",
+          "opacity": 1
+        }
+      ]
+    },
+    {
+      "id": "mid_clouds",
+      "parallax": 0.22,
+      "items": [
+        {
+          "asset": "cloud_7",
+          "x": 800,
+          "y": 4200,
+          "width": 580,
+          "color": "#CADEEB",
+          "opacity": 0.85
+        },
+        {
+          "asset": "cloud_5",
+          "x": 2400,
+          "y": 5100,
+          "width": 720,
+          "color": "#BFD9E8",
+          "opacity": 0.9
+        },
+        {
+          "asset": "cloud_2",
+          "x": 3800,
+          "y": 4500,
+          "width": 480,
+          "color": "#D0E2EE",
+          "opacity": 0.8
+        },
+        {
+          "asset": "cloud_1",
+          "x": 5200,
+          "y": 5400,
+          "width": 660,
+          "color": "#C5DCE9",
+          "opacity": 0.88
+        },
+        {
+          "asset": "cloud_8",
+          "x": 6500,
+          "y": 4800,
+          "width": 540,
+          "color": "#BFD9E8",
+          "opacity": 0.85
+        },
+        {
+          "asset": "cloud_9",
+          "x": 5800,
+          "y": 6300,
+          "width": 820,
+          "color": "#C5DCE9",
+          "opacity": 0.92
+        },
+        {
+          "asset": "cloud_6",
+          "x": 7600,
+          "y": 4100,
+          "width": 460,
+          "color": "#CADEEB",
+          "opacity": 0.78
+        },
+        {
+          "asset": "cloud_2",
+          "x": 8800,
+          "y": 5800,
+          "width": 700,
+          "color": "#BFD9E8",
+          "opacity": 0.88
+        },
+        {
+          "asset": "cloud_2",
+          "x": 10200,
+          "y": 4400,
+          "width": 600,
+          "color": "#D0E2EE",
+          "opacity": 0.82
+        },
+        {
+          "asset": "cloud_7",
+          "x": 11500,
+          "y": 5500,
+          "width": 540,
+          "color": "#C5DCE9",
+          "opacity": 0.86
+        },
+        {
+          "asset": "cloud_5",
+          "x": 12800,
+          "y": 4900,
+          "width": 720,
+          "color": "#BFD9E8",
+          "opacity": 0.9
+        },
+        {
+          "asset": "cloud_1",
+          "x": 14200,
+          "y": 5300,
+          "width": 480,
+          "color": "#CADEEB",
+          "opacity": 0.85
+        },
+        {
+          "asset": "cloud_9",
+          "x": 15400,
+          "y": 4600,
+          "width": 600,
+          "color": "#C5DCE9",
+          "opacity": 0.83
+        }
+      ]
+    },
+    {
+      "id": "low_clouds",
+      "parallax": 0.3,
+      "items": [
+        {
+          "asset": "cloud_1",
+          "x": 2881,
+          "y": 7075,
+          "width": 3341,
+          "color": "#FFFFFF",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_9",
+          "x": 3585,
+          "y": 7640,
+          "width": 2473,
+          "color": "#F2F8FC",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_7",
+          "x": 7611,
+          "y": 7447,
+          "width": 3106,
+          "color": "#E5F1FA",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_8",
+          "x": 8486,
+          "y": 7048,
+          "width": 3322,
+          "color": "#FFFFFF",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_9",
+          "x": 11401,
+          "y": 7085,
+          "width": 3121,
+          "color": "#FFFFFF",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_6",
+          "x": 13174,
+          "y": 7068,
+          "width": 3267,
+          "color": "#E5F1FA",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_5",
+          "x": 9028,
+          "y": 7689,
+          "width": 992,
+          "color": "#FFFFFF",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_2",
+          "x": 10332,
+          "y": 8104,
+          "width": 1128,
+          "color": "#E5F1FA",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_1",
+          "x": 9593,
+          "y": 7632,
+          "width": 1490,
+          "color": "#FFFFFF",
+          "opacity": 1
+        },
+        {
+          "asset": "cloud_5",
+          "x": 9120,
+          "y": 7092,
+          "width": 947,
+          "color": "#F2F8FC",
+          "opacity": 1
+        }
+      ]
+    },
+    {
+      "id": "mountains_back",
+      "parallax": 0.5,
+      "items": [
+        {
+          "asset": "mountain_2",
+          "x": -800,
+          "y": 9911,
+          "width": 3562,
+          "compress_h": 0.7,
+          "color": "#5085BB",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_3",
+          "x": 938,
+          "y": 9835,
+          "width": 3480,
+          "compress_h": 0.7,
+          "color": "#5085BB",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_3",
+          "x": 2519,
+          "y": 9590,
+          "width": 4106,
+          "compress_h": 0.7,
+          "color": "#5085BB",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_2",
+          "x": 4227,
+          "y": 9943,
+          "width": 3473,
+          "compress_h": 0.7,
+          "color": "#5085BB",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_2",
+          "x": 5882,
+          "y": 9591,
+          "width": 4446,
+          "compress_h": 0.7,
+          "color": "#5085BB",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_4",
+          "x": 7850,
+          "y": 9696,
+          "width": 3834,
+          "compress_h": 0.7,
+          "color": "#5085BB",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_4",
+          "x": 9637,
+          "y": 9690,
+          "width": 3851,
+          "compress_h": 0.7,
+          "color": "#5085BB",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_4",
+          "x": 11225,
+          "y": 9711,
+          "width": 3797,
+          "compress_h": 0.7,
+          "color": "#5085BB",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_5",
+          "x": 13430,
+          "y": 9465,
+          "width": 4424,
+          "compress_h": 0.7,
+          "color": "#5085BB",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_5",
+          "x": 15216,
+          "y": 9718,
+          "width": 3779,
+          "compress_h": 0.7,
+          "color": "#5085BB",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_4",
+          "x": 8858,
+          "y": 10600,
+          "width": 1947,
+          "compress_h": 0.55,
+          "color": "#5085BB",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_1",
+          "x": 5054,
+          "y": 10519,
+          "width": 2384,
+          "compress_h": 0.55,
+          "color": "#5085BB",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_5",
+          "x": 11173,
+          "y": 10388,
+          "width": 2635,
+          "compress_h": 0.55,
+          "color": "#5085BB",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_2",
+          "x": 9528,
+          "y": 10659,
+          "width": 1905,
+          "compress_h": 0.55,
+          "color": "#5085BB",
+          "opacity": 1
+        }
+      ]
+    },
+    {
+      "id": "mountains_front",
+      "parallax": 0.75,
+      "items": [
+        {
+          "asset": "mountain_3",
+          "x": -1200,
+          "y": 8728,
+          "width": 4411,
+          "compress_h": 1.0,
+          "color": "#1E4A75",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_4",
+          "x": 1449,
+          "y": 8453,
+          "width": 4902,
+          "compress_h": 1.0,
+          "color": "#1E4A75",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_5",
+          "x": 4387,
+          "y": 8153,
+          "width": 5438,
+          "compress_h": 1.0,
+          "color": "#1E4A75",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_2",
+          "x": 7490,
+          "y": 8719,
+          "width": 4799,
+          "compress_h": 1.0,
+          "color": "#1E4A75",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_4",
+          "x": 9860,
+          "y": 8514,
+          "width": 4794,
+          "compress_h": 1.0,
+          "color": "#1E4A75",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_3",
+          "x": 12045,
+          "y": 8304,
+          "width": 5169,
+          "compress_h": 1.0,
+          "color": "#1E4A75",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_4",
+          "x": 15073,
+          "y": 8240,
+          "width": 5283,
+          "compress_h": 1.0,
+          "color": "#1E4A75",
+          "opacity": 1
+        }
+      ]
+    },
+    {
+      "id": "mountains_foreground",
+      "parallax": 1.0,
+      "items": [
+        {
+          "asset": "mountain_5",
+          "x": -600,
+          "y": 10531,
+          "width": 2654,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_1",
+          "x": 536,
+          "y": 10602,
+          "width": 2560,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_5",
+          "x": 1833,
+          "y": 10681,
+          "width": 2061,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_4",
+          "x": 2848,
+          "y": 10521,
+          "width": 2696,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_3",
+          "x": 4141,
+          "y": 10576,
+          "width": 2476,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_4",
+          "x": 5348,
+          "y": 10603,
+          "width": 2370,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_2",
+          "x": 6402,
+          "y": 10569,
+          "width": 2715,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_1",
+          "x": 7805,
+          "y": 10595,
+          "width": 2588,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_4",
+          "x": 8956,
+          "y": 10470,
+          "width": 2896,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_4",
+          "x": 10263,
+          "y": 10622,
+          "width": 2294,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_1",
+          "x": 11390,
+          "y": 10704,
+          "width": 2120,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_2",
+          "x": 12400,
+          "y": 10555,
+          "width": 2775,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_4",
+          "x": 13652,
+          "y": 10587,
+          "width": 2431,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_1",
+          "x": 14638,
+          "y": 10550,
+          "width": 2782,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        },
+        {
+          "asset": "mountain_3",
+          "x": 15983,
+          "y": 10608,
+          "width": 2348,
+          "compress_h": 0.45,
+          "color": "#0A1F38",
+          "opacity": 1
+        }
+      ]
+    }
+  ]
+}

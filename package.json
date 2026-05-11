@@ -1,0 +1,42 @@
+{
+  "name": "angel-portfolio",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Angel You Need — interactive portfolio of Gabriel Miro",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "optimize:svg": "svgo -rf src/components/svg --pretty --indent=2"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "^4.0.3",
+    "@astrojs/react": "^4.1.2",
+    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/vercel": "^8.0.1",
+    "@fontsource/bangers": "^5.1.0",
+    "@fontsource/fraunces": "^5.1.0",
+    "@fontsource/inter-tight": "^5.1.0",
+    "@fontsource/jetbrains-mono": "^5.1.1",
+    "@pixi/react": "^8.0.5",
+    "@tailwindcss/vite": "^4.0.0",
+    "astro": "^5.1.1",
+    "gsap": "^3.12.5",
+    "pixi.js": "^8.18.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "svgo": "^4.0.1"
+  },
+  "packageManager": "pnpm@10.33.0"
+}

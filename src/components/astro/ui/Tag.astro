@@ -1,0 +1,13 @@
+---
+interface Props {
+  fill?: string;
+  class?: string;
+}
+
+const { fill, class: className = '' } = Astro.props;
+const style = fill ? `background: ${fill};` : undefined;
+---
+
+<span class:list={['ink-tag', className]} style={style}>
+  <slot />
+</span>

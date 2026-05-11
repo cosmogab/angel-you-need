@@ -1,0 +1,1277 @@
+/* ==========================================================================
+   The Angel You Need — global styles & design tokens
+   Tokens are the source of truth. Never hardcode colors or fonts elsewhere.
+   ========================================================================== */
+
+@import 'tailwindcss';
+
+/* --- Fonts (self-hosted via @fontsource, latin subset) ------------------- */
+@import '@fontsource/fraunces/400.css';
+@import '@fontsource/fraunces/500.css';
+@import '@fontsource/fraunces/600.css';
+@import '@fontsource/fraunces/700.css';
+@import '@fontsource/fraunces/400-italic.css';
+@import '@fontsource/fraunces/600-italic.css';
+@import '@fontsource/bangers/400.css';
+@import '@fontsource/inter-tight/400.css';
+@import '@fontsource/inter-tight/500.css';
+@import '@fontsource/inter-tight/600.css';
+@import '@fontsource/inter-tight/700.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
+/* --- Design tokens ------------------------------------------------------- */
+:root {
+  /* Gabo — character palette */
+  --gabo-hair: #FFD93D;
+  --gabo-hair-shadow: #E8B820;
+  --gabo-skin: #FFE0B8;
+  --gabo-skin-shadow: #E8B88A;
+  --gabo-tunic: #FFFFFF;
+  --gabo-tunic-shadow: #E8E0D0;
+  --gabo-belt: #E8A94A;
+  --gabo-halo: #FFD93D;
+
+  /* Cumul — personal mount palette */
+  --cumul-base: #FFFBF0;
+  --cumul-highlight: #FFE8B0;
+  --cumul-shadow: #E6D9B8;
+
+  /* Sky — per-project palette. Used for island tinting and interior scenes
+     only; the world map's sky is the static double-gradient defined below
+     and never tweens. The default values here apply when no [data-sky] is
+     active (home, 404). */
+  --sky-base: #7DC4F0;
+  --sky-accent: #FFD97A;
+
+  /* World sky — stable double gradient anchored to the 16000×11200 world.
+     Layer 1 is a left→right time-of-day sweep (night → sunset → midday →
+     golden hour → pre-dawn), interpolated in OKLCH so warm↔cool
+     transitions don't pass through muddy gray midpoints. The #FFD9B5
+     (36 %) and #FFE0A0 (64 %) stops are deliberate "warm cream" bridges
+     guiding the sunset→day and day→golden transitions through good
+     colors. Layer 2 is a soft vertical atmospheric depth overlay (dark
+     zenith, warm hazy horizon) — kept gentle so it doesn't fight the
+     time-of-day palette. Authoritative reference:
+     references/sky-mockup.html. */
+  --world-sky-horizontal: linear-gradient(in oklch to right,
+    #1A0F35 0%,
+    #5A2670 12%,
+    #C13D3F 22%,
+    #FF7855 28%,
+    #FFD9B5 36%,
+    #B8DDF0 42%,
+    #7DC4F0 50%,
+    #B5E0F5 58%,
+    #FFE0A0 64%,
+    #FFB347 78%,
+    #5A4A85 90%,
+    #1E3A7A 100%);
+  --world-sky-vertical: linear-gradient(to bottom,
+    rgba(10, 5, 30, 0.25)     0%,
+    rgba(10, 5, 30, 0.10)     25%,
+    rgba(0, 0, 0, 0)          50%,
+    rgba(255, 248, 230, 0.10) 75%,
+    rgba(255, 240, 210, 0.20) 100%);
+
+  /* Universal */
+  --ink: #1A1613;
+  --cream: #FFF8E8;
+
+  /* Typography */
+  --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-display: 'Bangers', 'Impact', sans-serif;
+  --font-sans: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+
+  /* Line work (ligne claire rules) */
+  --stroke-weight: 2.5px;
+  --stroke-color: var(--ink);
+
+  /* Motion */
+  --ease-cloud: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-flight: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur-med: 420ms;
+  --dur-slow: 1200ms;
+
+  /* Inkbox UI grammar — borders, hard offset shadows, and radii used by
+     .ink-chip / .ink-tag / .ink-card / .ink-stat-card. Surfaces and ink
+     color reuse --cream, --cumul-base (pearl), and --ink above. */
+  --ink-border:        2.5px;
+  --ink-border-bold:   3.5px;
+  --ink-border-heavy:  4px;
+
+  --ink-shadow-sm: 2px 2px 0 var(--ink);
+  --ink-shadow-md: 4px 4px 0 var(--ink);
+  --ink-shadow-lg: 6px 6px 0 var(--ink);
+
+  --radius-sharp: 2px;
+  --radius-soft:  3px;
+  --radius-card:  4px;
+}
+
+/* Per-project sky palettes — applied on <html data-sky="..."> for standalone
+   project pages, on the InteriorScene overlay, and (eventually) on island
+   tints. Never used for the world map's sky. */
+[data-sky='told']          { --sky-base: #FFB347; --sky-accent: #FF6B35; }
+[data-sky='culture-relax'] { --sky-base: #FF6B5B; --sky-accent: #C62E1F; }
+[data-sky='evolt']         { --sky-base: #5BA3E0; --sky-accent: #2D6FAF; }
+[data-sky='cosmodinos']    { --sky-base: #2E1B5C; --sky-accent: #9B5FE0; }
+[data-sky='eveia']         { --sky-base: #7ED8B0; --sky-accent: #3FB085; }
+[data-sky='fofly-api']     { --sky-base: #1E3A7A; --sky-accent: #FFC947; }
+
+/* --- Base element styles ------------------------------------------------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  /* Solid fallback for the brief moment before WorldSky paints on the home,
+     and the base layer beneath standalone project pages' html[data-sky]
+     cream-majority gradient. */
+  background: var(--sky-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Standalone project pages get a cream-majority themed gradient so --ink
+   text stays AA-legible on dark themes (Cosmodinos, Fofly API). The home
+   has its own WorldSky which covers this. */
+html[data-sky] {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--sky-base) 18%, var(--cream)) 0%,
+    color-mix(in srgb, var(--sky-accent) 28%, var(--cream)) 100%
+  );
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* Bangers utility for display titles — project names, big stats */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+  font-weight: 400;
+}
+
+code, pre, kbd {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* --- Skip-to-content (a11y) --------------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--cream);
+  color: var(--ink);
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: top var(--dur-fast) var(--ease-cloud);
+}
+.skip-link:focus {
+  top: 1rem;
+  outline: 2px solid var(--gabo-halo);
+  outline-offset: 2px;
+}
+
+/* --- Custom halo-style focus ring --------------------------------------- */
+:focus-visible {
+  outline: 3px solid var(--gabo-halo);
+  outline-offset: 3px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 6px rgba(255, 217, 61, 0.25);
+}
+
+/* --- prefers-reduced-motion — global guards ----------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- Shared utility ------------------------------------------------------ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Sky map (Phase 1) -------------------------------------------------- */
+.sky-map {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.sky-map:active {
+  cursor: grabbing;
+}
+.sky-map__sky,
+.sky-map__world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+/* The decor pane sits in viewport space between the panned sky background
+   and the panned world plane (markers + Gabo). Its children apply their
+   own per-layer parallax transforms; the pane itself stays inert. */
+.sky-map__decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* --- Parallax decor layers --------------------------------------------- */
+/* `.sky-map__decor` hosts a single PIXI.js v8 <canvas> rendered by
+   DecorCanvas.tsx. All five active strata (stars, high/low clouds, two
+   mountain layers) are sprite batches inside that canvas. Star twinkle +
+   parallax positioning are driven imperatively from useTick — no CSS
+   keyframes, no per-item DOM, no mask-image rasterization. The canvas
+   is transparent so the WorldSky gradient behind shows through. */
+
+/* Project island marker. SVG silhouette + label below. */
+.island-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  border: 0;
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    transform var(--dur-med) var(--ease-cloud),
+    filter var(--dur-fast) var(--ease-cloud);
+}
+.island-marker__svg {
+  width: 480px;
+  height: auto;
+  display: block;
+}
+.island-marker:hover,
+.island-marker:focus-visible {
+  transform: translate(-50%, -52%);
+  filter: drop-shadow(0 12px 22px rgba(26, 22, 19, 0.22));
+}
+.island-marker__label {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  text-shadow:
+    0 1px 0 var(--cream),
+    0 2px 6px rgba(255, 255, 255, 0.55);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .island-marker,
+  .island-marker:hover,
+  .island-marker:focus-visible {
+    transition: none;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* --- Mini-map ----------------------------------------------------------- */
+.mini-map {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 10;
+  padding: 0.5rem 0.5rem 0.25rem;
+  background: var(--cumul-base);
+  border: var(--ink-border-bold) solid var(--ink);
+  border-radius: var(--radius-sharp);
+  box-shadow: var(--ink-shadow-md);
+  display: grid;
+  gap: 0.25rem;
+}
+.mini-map__title {
+  margin: 0;
+  padding: 0 0.25rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  opacity: 0.75;
+}
+.mini-map svg {
+  display: block;
+  border-radius: var(--radius-sharp);
+  cursor: crosshair;
+  border: var(--ink-border) solid var(--ink);
+  background: var(--sky-base);
+}
+
+@media (max-width: 640px) {
+  .mini-map {
+    right: 0.5rem;
+    bottom: 0.5rem;
+    transform: scale(0.82);
+    transform-origin: bottom right;
+  }
+}
+
+/* ==========================================================================
+   Angel system — Gabo + Cumul (Phase 2)
+   ========================================================================== */
+
+.angel-system {
+  position: absolute;
+  width: 280px;
+  height: 260px;
+  /* `left` + `top` come from inline style (world coords). Center the pair on that point. */
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* Gabo is decorative; clicks go to the sky beneath. */
+  animation: angel-bob 2.1s ease-in-out infinite;
+  animation-delay: -0.4s;
+  will-change: transform;
+}
+
+.angel-system__cumul {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 118px;
+}
+
+.angel-system__gabo {
+  position: absolute;
+  left: 50%;
+  bottom: 66px;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 168px;
+}
+
+.cumul,
+.gabo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* --- Cumul — constant animations ---------------------------------------- */
+.cumul {
+  animation: cumul-pulse 2.4s var(--ease-cloud) infinite;
+  transform-origin: 50% 75%;
+}
+
+.cumul-tail__wisp {
+  transform-origin: right center;
+  transform-box: fill-box;
+}
+.cumul-tail__wisp--a { animation: wisp-ondulate 2.6s ease-in-out infinite; }
+.cumul-tail__wisp--b { animation: wisp-ondulate 3.1s ease-in-out infinite -0.7s; }
+.cumul-tail__wisp--c { animation: wisp-ondulate 2.8s ease-in-out infinite -1.2s; }
+
+/* Detachable puff particles — faint, occasional, staggered. */
+.cumul-puff {
+  opacity: 0;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.cumul-puff--a { animation: puff-detach 5s ease-out infinite 0.5s; }
+.cumul-puff--b { animation: puff-detach 6.2s ease-out infinite 2.4s; }
+.cumul-puff--c { animation: puff-detach 5.6s ease-out infinite 4.1s; }
+
+/* --- Gabo — constant animations ----------------------------------------- */
+#gabo-halo {
+  /* Percentage-based so wobble pivot stays correct across V1 (1024 viewBox)
+     and the future V2 illustrator art, regardless of viewBox dimensions. */
+  transform-origin: 50% 12%;
+  transform-box: fill-box;
+  animation: halo-wobble 2s ease-in-out infinite;
+}
+
+#gabo-eyes {
+  transform-origin: center 84px;
+  animation: blink 5.2s steps(1, end) infinite;
+}
+
+/* Blinks drift out of sync over time — two eyes blink together but the whole
+   animation timing is slightly irregular by design. */
+
+/* --- Mischief actions --------------------------------------------------- */
+.angel-system[data-mischief='spin-halo'] #gabo-halo {
+  animation: halo-spin 1.1s linear infinite;
+}
+.angel-system[data-mischief='balance'] .angel-system__gabo {
+  animation: angel-balance 1.4s ease-in-out infinite;
+}
+.angel-system[data-mischief='wave'] .gabo-arm--right {
+  transform-origin: 128px 134px;
+  transform-box: fill-box;
+  animation: arm-wave 0.9s ease-in-out infinite;
+}
+.angel-system[data-mischief='yawn'] #gabo-mouth {
+  transform-origin: 100px 108px;
+  transform-box: fill-box;
+  animation: mouth-yawn 1.8s ease-in-out infinite;
+}
+
+/* --- Pos1 (V1 art) — layered composition --------------------------------- */
+/* GaboPose1 stacks 4 SVG layers (wings, body, halo) at the same square
+   footprint. The cloud (CumulHomeV1) sits in AngelSystem's __cumul slot. */
+.gabo-pose1 {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+.gabo-pose1 > * {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+/* Wings — half the canvas, pushed apart so they sit at the shoulders.
+   The flap rotation lives on `transform`; size + offset live on
+   width/inset to avoid composing scale into the same property. */
+.gabo-pose1__wing {
+  inset: auto;
+  top: 22%;
+  width: 42%;
+  height: 42%;
+  transform-origin: 50% 45%;
+  animation: wing-flap 3.2s ease-in-out infinite;
+}
+.gabo-pose1__wing--left {
+  left: 13%;
+}
+.gabo-pose1__wing--right {
+  /* scaleX(-1) is baked into the keyframe so it composes with rotate(). */
+  right: 13%;
+  animation-name: wing-flap-right;
+  animation-delay: -1.6s;
+}
+
+/* Idle-home / idle-mischief use the V1 1024x1024 art which needs
+   square-ish wrappers and a tighter overlap so Gabo sits on the cloud. */
+.angel-system[data-angel-state='idle-home'] .angel-system__gabo,
+.angel-system[data-angel-state='idle-mischief'] .angel-system__gabo {
+  width: 200px;
+  height: 200px;
+  bottom: 30px;
+}
+.angel-system[data-angel-state='idle-home'] .angel-system__cumul,
+.angel-system[data-angel-state='idle-mischief'] .angel-system__cumul {
+  width: 200px;
+  height: 200px;
+  bottom: -60px;
+  /* +10px nudge to align cloud body under Gabo (V1 art is asymmetric). */
+  transform: translateX(calc(-50% + 10px));
+}
+
+/* CumulHomeV1 — idle home/mischief cloud floats with a combined
+   pulse + drift. Single keyframe to avoid transform conflicts. */
+.cumul-home {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 75%;
+  animation: cumul-home-bob 4.4s ease-in-out infinite;
+}
+
+/* --- Travelling posture (Phase 3) -------------------------------------- */
+
+/* Pause constant bob during traveling / arriving / parked. */
+.angel-system[data-angel-state='traveling'],
+.angel-system[data-angel-state='arriving'],
+.angel-system[data-angel-state='parked'] {
+  animation-play-state: paused;
+}
+
+/* Traveling: the V1 art (gabo2.svg) is 1024x1024 and bundles Gabo+cloud
+   in one frame, so the wrapper grows to a square footprint.
+
+   The directional pose splits across two layers on purpose:
+   - The wrapper rotates by `--flight-angle` (smooth tween — leans in
+     and out of turns).
+   - The inner art flips by `--flight-flip` (instant — never tweened).
+   Tweening scaleX(1)→scaleX(-1) crosses 0 mid-way and squishes Gabo
+   to a 1-pixel sliver, which is the deformation we'd see otherwise.
+
+   `--flight-angle` and `--flight-flip` are set inline by AngelSystem
+   from the live atan2 bearing of the seek frame. Fallback `-8deg` covers
+   the brief moment before the first angle is committed. */
+.angel-system[data-angel-state='traveling'] .angel-system__gabo {
+  width: 240px;
+  height: 240px;
+  bottom: -20px;
+  transform:
+    translateX(-50%)
+    rotate(var(--flight-angle, -8deg));
+  /* Intentionally no transform transition: the angle is already updated
+     every rAF tick by the seek loop (60fps) which is plenty smooth. A CSS
+     transition on top would lag the rotation behind the cursor by its
+     duration during fast direction changes. */
+}
+.gabo-pose2 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.gabo-pose2__art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(var(--flight-flip, 1));
+  transform-origin: 50% 50%;
+  /* No transition — flipping is instantaneous to avoid the scaleX(0)
+     squish when crossing between right- and left-facing flight. */
+}
+.angel-system[data-angel-state='arriving'] .angel-system__gabo {
+  transform: translateX(-50%) rotate(-2deg) translateY(-4px);
+  transition: transform 320ms var(--ease-cloud);
+}
+
+/* Hair trails back — placeholder skew effect (V2 artwork will provide proper trail). */
+.angel-system[data-angel-state='traveling'] #gabo-hair {
+  transform: skewX(-10deg) translateX(4px);
+  transform-origin: 100px 60px;
+  transform-box: fill-box;
+  transition: transform 220ms var(--ease-flight);
+}
+
+/* Cumul stretches horizontally — like being pulled through wind. */
+.angel-system[data-angel-state='traveling'] .cumul {
+  animation: none;
+  transform: scaleX(1.15) scaleY(0.9);
+  transition: transform 220ms var(--ease-flight);
+}
+
+/* Cumul tail wisps elongate + fade more during flight. */
+.angel-system[data-angel-state='traveling'] .cumul-tail__wisp {
+  animation: none;
+  transform: scaleX(1.6) translateX(-6px);
+  opacity: 0.75;
+  transition:
+    transform 220ms var(--ease-flight),
+    opacity 220ms var(--ease-flight);
+}
+
+/* Arrival hop: Cumul settles, Gabo bounces once. */
+@keyframes arrive-hop {
+  0%   { transform: translateX(-50%) translateY(0); }
+  40%  { transform: translateX(-50%) translateY(-10px); }
+  100% { transform: translateX(-50%) translateY(0); }
+}
+.angel-system[data-angel-state='arriving'] .angel-system__cumul {
+  animation: arrive-hop 620ms var(--ease-cloud);
+}
+
+/* --- Speed lines (manga motion streaks) -------------------------------- */
+/* The container is oversized (160vmax square) and rotated by --streak-angle
+   so the streaks' local right-to-left flow maps to "opposite of Gabo's
+   motion vector" in screen space. The outer .sky-map's overflow:hidden
+   clips anything spilling past the viewport. */
+.speed-lines {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160vmax;
+  height: 160vmax;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(var(--streak-angle, 0deg));
+  transition: opacity 180ms var(--ease-cloud);
+}
+.speed-lines[data-visible='true'] {
+  opacity: 1;
+}
+
+.speed-line {
+  position: absolute;
+  left: 100%;
+  height: 2px;
+  background: linear-gradient(
+    to left,
+    transparent 0%,
+    color-mix(in srgb, var(--ink) 55%, transparent) 40%,
+    color-mix(in srgb, var(--ink) 70%, transparent) 65%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  animation: streak-flow 0.5s linear infinite;
+  will-change: transform;
+}
+
+/* Staggered perpendicular positions, widths, speeds, and phases — these
+   run along the container's y axis, which rotates with the flight. */
+.speed-line:nth-child(1)  { top:  4%; width: 140px; animation-duration: 0.38s; animation-delay: -0.05s; }
+.speed-line:nth-child(2)  { top: 11%; width:  90px; animation-duration: 0.52s; animation-delay: -0.18s; }
+.speed-line:nth-child(3)  { top: 17%; width: 170px; animation-duration: 0.41s; animation-delay: -0.31s; height: 3px; }
+.speed-line:nth-child(4)  { top: 25%; width: 110px; animation-duration: 0.46s; animation-delay: -0.12s; }
+.speed-line:nth-child(5)  { top: 33%; width: 150px; animation-duration: 0.36s; animation-delay: -0.28s; }
+.speed-line:nth-child(6)  { top: 41%; width:  80px; animation-duration: 0.58s; animation-delay: -0.09s; }
+.speed-line:nth-child(7)  { top: 49%; width: 200px; animation-duration: 0.34s; animation-delay: -0.22s; height: 3px; }
+.speed-line:nth-child(8)  { top: 57%; width: 120px; animation-duration: 0.48s; animation-delay: -0.03s; }
+.speed-line:nth-child(9)  { top: 64%; width: 100px; animation-duration: 0.44s; animation-delay: -0.26s; }
+.speed-line:nth-child(10) { top: 71%; width: 160px; animation-duration: 0.4s;  animation-delay: -0.14s; }
+.speed-line:nth-child(11) { top: 78%; width:  70px; animation-duration: 0.55s; animation-delay: -0.32s; }
+.speed-line:nth-child(12) { top: 85%; width: 130px; animation-duration: 0.42s; animation-delay: -0.07s; }
+.speed-line:nth-child(13) { top: 91%; width: 110px; animation-duration: 0.5s;  animation-delay: -0.2s; }
+.speed-line:nth-child(14) { top: 96%; width:  90px; animation-duration: 0.46s; animation-delay: -0.28s; }
+
+@keyframes streak-flow {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-170vmax, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .speed-lines { display: none; }
+}
+
+/* ==========================================================================
+   Phase 4 — Pose crossfade, kanji impact, interior scene, ambient decor
+   ========================================================================== */
+
+/* --- Pose crossfade (SPEC §5) ------------------------------------------ */
+/* `.angel-system__gabo` gets a new `key` whenever the current pose
+   changes (pos1 ↔ pos2 ↔ pose(project)). React remounts the node, and
+   this animation fades the new pose in over 300ms. Opacity only — the
+   static transform on `.angel-system__gabo` (translateX) and the
+   per-state `rotate` via CSS transition stay free of conflicts. The
+   kanji impact overlay below covers the transition moment visually. */
+.angel-system__gabo {
+  animation: pose-appear 300ms var(--ease-cloud) both;
+}
+@keyframes pose-appear {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .angel-system__gabo { animation: none; }
+}
+
+/* --- Kanji impact overlay --------------------------------------------- */
+/* Mounted by AngelSystem for PUFF_DURATION_MS (1000ms) on every pose
+   change. A brush-style Japanese onomatopoeia (random pick, default
+   pool defined in SmokePuff.tsx) snaps onto the viewport with overshoot,
+   holds, and fades — manga panel grammar in the early Toriyama spirit.
+   Four asymmetric ink-spatter dots scatter at the snap peak.
+   AngelSystem renders this layer through a portal to <body> so it sits
+   above the pannable world and centers on the screen instead of on
+   Gabo's transform-shifting position. */
+.kanji-puff-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  /* Above interior scene (30) and the rest of the sky-map UI, below the
+     skip-link (100) so a11y focus jumps still work mid-transition. */
+  z-index: 50;
+}
+/* Inner box wraps the kanji span tightly and acts as the positioning
+   context for the absolutely-placed spatters. Flex centers this box on
+   the screen, so longer onomatopoeias (3-char vs 2-char) stay
+   symmetrically centered instead of growing more downward than upward. */
+.kanji-puff {
+  position: relative;
+  pointer-events: none;
+}
+.kanji-puff__word {
+  /* Yuji Syuku is loaded from Google Fonts in Head.astro. `display:
+     block` so the span participates in flex layout as a clean box;
+     tight line-height keeps that box close to the visible glyph so
+     flex-centering lands on the character itself. */
+  display: block;
+  font-family: 'Yuji Syuku', var(--font-serif);
+  font-weight: 400;
+  font-size: 240px;
+  line-height: 0.85;
+  color: var(--ink);
+  white-space: nowrap;
+  user-select: none;
+  transform-origin: center;
+  animation: kanji-snap 1000ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.kanji-puff__spatter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--size, 10px);
+  height: var(--size, 10px);
+  margin: calc(var(--size, 10px) * -0.5) 0 0 calc(var(--size, 10px) * -0.5);
+  background: var(--ink);
+  border-radius: 50%;
+  animation: kanji-spatter-scatter 1000ms var(--ease-cloud) both;
+}
+
+/* Snap fast to a 1.4 overshoot, settle quickly to natural size, then
+   hold for ~65% of the timeline at scale(1.0) before a quick fade. The
+   long stretch at the smaller "settled" scale is what gives the impact
+   weight without dragging the whole transition out. */
+@keyframes kanji-snap {
+  0%   { opacity: 0; transform: scale(0.3) rotate(-8deg); }
+  10%  { opacity: 1; transform: scale(1.4) rotate(0deg); }
+  20%  { opacity: 1; transform: scale(1.0) rotate(0deg); }
+  85%  { opacity: 1; transform: scale(1.0) rotate(0deg); }
+  100% { opacity: 0; transform: scale(1.1) rotate(0deg); }
+}
+@keyframes kanji-spatter-scatter {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0); }
+  15%  { opacity: 1; transform: translate(calc(var(--dx) * 0.45), calc(var(--dy) * 0.45)) scale(1); }
+  60%  { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1); }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kanji-puff-screen { display: none; }
+}
+
+/* --- Interior scene overlay -------------------------------------------- */
+.interior-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  color: var(--ink);
+  overflow: auto;
+  overscroll-behavior: contain;
+  /* Cream-majority gradient applied directly so the background travels
+     with the scrollable content (an absolute layer would only cover the
+     first viewport, leaving content scrolled past it on a blank page).
+     Tinted by --sky-base / --sky-accent set per project on [data-sky]. */
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--sky-base) 18%, var(--cream)) 0%,
+      color-mix(in srgb, var(--sky-accent) 28%, var(--cream)) 100%
+    );
+  /* clipPath is set inline and animated by GSAP for the expand effect. */
+}
+
+.interior-scene__corner {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 5;
+  pointer-events: none;
+  animation: corner-cumul-bob 3.2s ease-in-out infinite;
+}
+.interior-scene__corner-cumul {
+  width: 120px;
+  height: 65px;
+}
+@keyframes corner-cumul-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .interior-scene__corner { animation: none; }
+}
+
+.scene-content {
+  position: relative;
+  z-index: 2;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 7rem 1.5rem 5rem;
+  display: grid;
+  gap: 1.75rem;
+}
+
+.scene-header {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Project metadata strip — period · role · team · status as ink-tags. */
+.scene-meta-tags {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* Card heading — italic serif on cream/pearl, no color-mix tint. The
+   ink border + hard shadow already carry the "manga panel" weight, so
+   the title can stay sober. */
+.ink-card__title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  margin: 0 0 0.65rem;
+  color: var(--ink);
+}
+
+.ink-card__body {
+  font-family: var(--font-sans);
+  font-size: 1.02rem;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--ink);
+}
+
+.ink-card__list {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.4rem;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+/* Chip grid — used for tech stack pills. */
+.ink-chip-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+/* Chained selector so this beats `.ink-chip { display: inline-block }`
+   defined later in the file (Inkbox primitives section). Without the
+   chain, equal specificity falls back to source order and the icon
+   would stack above the slug text instead of sitting beside it. */
+.ink-chip.ink-chip--with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.ink-chip.ink-chip--with-icon img {
+  display: block;
+}
+
+/* Impact section — stats in a grid of ink-stat-cards, no surrounding
+   card frame so the numbers read as the focal point. */
+.scene-impact {
+  display: grid;
+  gap: 0.85rem;
+}
+.scene-impact__title {
+  margin: 0;
+}
+.ink-stat-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.85rem;
+}
+.ink-stat-grid .ink-stat-card {
+  display: grid;
+  gap: 0.35rem;
+}
+.ink-stat-grid .ink-stat-card .ink-stat-label,
+.ink-stat-grid .ink-stat-card .ink-stat {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Phase 5 — Intro cloud (landing tagline + home button + hint)
+   ========================================================================== */
+
+.intro-cloud {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  animation: intro-fade-in 900ms var(--ease-cloud) both;
+}
+@keyframes intro-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Tagline block — above Gabo. In world coords, pans with the sky. */
+.intro-cloud__tagline {
+  position: absolute;
+  left: 0;
+  top: -260px;
+  transform: translateX(-50%);
+  width: min(640px, 92vw);
+  text-align: center;
+  color: var(--ink);
+  filter: drop-shadow(0 2px 12px color-mix(in srgb, var(--cream) 55%, transparent));
+}
+.intro-cloud__kicker {
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  margin: 0 0 0.75rem;
+  color: var(--ink);
+}
+.intro-cloud__subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0;
+}
+.intro-cloud__subtitle em {
+  font-style: normal;
+  font-weight: inherit;
+  color: inherit;
+}
+
+/* Hint — fades on first interaction or after 4s idle. */
+.intro-cloud__hint {
+  position: absolute;
+  left: 0;
+  top: 240px;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: min(600px, 90vw);
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: clamp(0.9rem, 1.7vw, 1.05rem);
+  color: color-mix(in srgb, var(--ink) 75%, transparent);
+  margin: 0;
+  opacity: 0;
+  transition: opacity 600ms var(--ease-cloud);
+  pointer-events: none;
+}
+.intro-cloud__hint[data-visible='true'] {
+  opacity: 1;
+}
+.intro-cloud__hint em {
+  font-style: italic;
+}
+
+/* Mini-map home marker: gold halo disc + central dot, stands apart from
+   the project dots by being larger and ringed. */
+.mini-map__home circle:first-child {
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--gabo-halo) 70%, transparent));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-cloud { animation: none; }
+  .intro-cloud__hint { transition: none; }
+}
+
+/* --- Phase 5 motion polish -------------------------------------------- */
+/* Snappier overlay close: felt a bit laggy at 0.75s, down to 0.55s.
+   Actual value lives in InteriorScene.tsx's GSAP tween — keep this CSS
+   consistent for the clip-path transition properties. */
+.interior-scene {
+  transition-property: clip-path, opacity;
+  transition-timing-function: var(--ease-cloud);
+}
+
+/* --- Keyframes ---------------------------------------------------------- */
+@keyframes angel-bob {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50%      { transform: translate(-50%, -50%) translateY(-6px); }
+}
+@keyframes cumul-pulse {
+  0%, 100% { transform: scale(0.99); }
+  50%      { transform: scale(1.02); }
+}
+@keyframes wisp-ondulate {
+  0%, 100% { transform: translateX(0) scaleX(1); opacity: inherit; }
+  50%      { transform: translateX(-4px) scaleX(1.06); }
+}
+@keyframes puff-detach {
+  0%          { opacity: 0; transform: translate(0, 0) scale(1); }
+  10%         { opacity: 0.8; }
+  100%        { opacity: 0; transform: translate(-14px, -22px) scale(0.6); }
+}
+@keyframes halo-wobble {
+  0%, 100% { transform: rotate(-1.5deg) translateY(0); }
+  50%      { transform: rotate(1.5deg) translateY(-1px); }
+}
+@keyframes halo-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  94%, 98%      { transform: scaleY(0.08); }
+}
+@keyframes angel-balance {
+  0%, 100% { transform: translateX(-50%) rotate(-2deg); }
+  50%      { transform: translateX(-50%) rotate(2deg); }
+}
+@keyframes arm-wave {
+  0%, 100% { transform: rotate(-8deg); }
+  50%      { transform: rotate(24deg); }
+}
+@keyframes mouth-yawn {
+  0%, 100% { transform: scaleY(1) scaleX(1); }
+  50%      { transform: scaleY(2.6) scaleX(0.85); }
+}
+@keyframes wing-flap {
+  0%, 100% { transform: rotate(-4deg); }
+  50%      { transform: rotate(6deg); }
+}
+@keyframes wing-flap-right {
+  /* Mirror baked-in so the right wing flaps symmetrically with the left. */
+  0%, 100% { transform: scaleX(-1) rotate(-4deg); }
+  50%      { transform: scaleX(-1) rotate(6deg); }
+}
+@keyframes cumul-home-bob {
+  0%, 100% { transform: scale(0.99) translateY(0); }
+  50%      { transform: scale(1.02) translateY(-4px); }
+}
+
+/* --- Reduced motion: pause everything, leave the art visible ----------- */
+@media (prefers-reduced-motion: reduce) {
+  .angel-system,
+  .cumul,
+  .cumul-tail__wisp,
+  .cumul-puff,
+  #gabo-halo,
+  #gabo-eyes,
+  .gabo-arm--right,
+  #gabo-mouth,
+  .angel-system[data-mischief] .angel-system__gabo,
+  .angel-system[data-mischief] #gabo-halo {
+    animation: none !important;
+    transform: translate(-50%, -50%);
+  }
+  .cumul,
+  .cumul-tail__wisp,
+  .cumul-puff,
+  #gabo-halo,
+  #gabo-eyes,
+  .gabo-arm--right,
+  #gabo-mouth,
+  .cumul-home,
+  .gabo-pose1__wing--left {
+    transform: none;
+  }
+  /* Keep the right wing mirrored at rest. */
+  .gabo-pose1__wing--right {
+    animation: none !important;
+    transform: scaleX(-1);
+  }
+  .gabo-pose1__wing--left {
+    animation: none !important;
+  }
+  .cumul-home {
+    animation: none !important;
+  }
+  .cumul-puff { opacity: 0; }
+}
+
+/* --- Inkbox UI primitives -----------------------------------------------
+   Atomic component grammar shared across project pages, cloud detail
+   panes, and other surfaces. Hard offset shadows, ink-line borders,
+   cream/pearl surfaces. Tokens reuse :root above (--ink, --cream,
+   --cumul-base, --font-display/serif/sans) plus the --ink-border-* /
+   --ink-shadow-* / --radius-* tokens.
+
+   Kept unlayered (matching the rest of this file's author-style
+   conventions) so it can override the unlayered `button { padding: 0;
+   border: 0; … }` reset above. Cascade layers: unlayered rules always
+   win against layered ones, so wrapping these in @layer components
+   would let the bare `button` reset override .ink-chip on Buttons. */
+
+/* Atomic chip — shared base for Button and Pill (visually identical;
+   semantic difference is the HTML element used). */
+.ink-chip {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink);
+  background: var(--cream);
+  padding: 4px 10px;
+  border: var(--ink-border) solid var(--ink);
+  border-radius: var(--radius-sharp);
+  box-shadow: var(--ink-shadow-sm);
+}
+
+button.ink-chip,
+a.ink-chip {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* <button> needs an explicit reset — its user-agent font, appearance,
+   and text-align differ from <a>'s and bleed through .ink-chip even
+   when class properties target the same slots. Re-applying font is
+   necessary because `font: inherit` wipes our explicit font-* values
+   above; we therefore reset only the system parts that aren't already
+   set by .ink-chip. */
+button.ink-chip {
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: inherit;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  button.ink-chip,
+  a.ink-chip {
+    transition: transform 80ms ease, box-shadow 80ms ease;
+  }
+  button.ink-chip:hover,
+  a.ink-chip:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--ink);
+  }
+  button.ink-chip:active,
+  a.ink-chip:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 var(--ink);
+  }
+}
+
+button.ink-chip:focus-visible,
+a.ink-chip:focus-visible {
+  outline: 2.5px solid var(--gabo-halo);
+  outline-offset: 2px;
+}
+
+/* Tag — project metadata badge. Default fill cascades from
+   [data-sky="..."] via --sky-accent; override with the `fill` prop. */
+.ink-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--ink);
+  background: var(--sky-accent);
+  padding: 4px 10px;
+  border: var(--ink-border) solid var(--ink);
+  border-radius: var(--radius-sharp);
+}
+
+/* Card — main project content container. */
+.ink-card {
+  background: var(--cumul-base);
+  border: var(--ink-border-heavy) solid var(--ink);
+  border-radius: var(--radius-soft);
+  box-shadow: var(--ink-shadow-lg);
+  padding: 20px 22px;
+}
+
+/* Stat card — impact metric block. */
+.ink-stat-card {
+  background: var(--cumul-base);
+  border: var(--ink-border-bold) solid var(--ink);
+  border-radius: var(--radius-soft);
+  box-shadow: 5px 5px 0 var(--ink);
+  padding: 16px 18px 14px;
+  position: relative;
+}
+
+/* Display typography */
+.ink-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  margin: 0;
+}
+.ink-stat {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 6vw, 64px);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  margin: 4px 0 0;
+}
+.ink-prose {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0;
+}
+.ink-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+  opacity: 0.55;
+  margin: 0;
+}
+.ink-stat-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  opacity: 0.65;
+}
+
+/* Halftone screentone — ambient texture overlay. */
+.ink-halftone {
+  background-image: radial-gradient(var(--ink) 1px, transparent 1.4px);
+  background-size: 9px 9px;
+  opacity: 0.05;
+  pointer-events: none;
+}

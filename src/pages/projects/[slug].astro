@@ -1,0 +1,123 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import type { Project } from '~/types/project';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { data } = project;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const canonical = `${siteUrl}/projects/${project.id}`;
+
+const projectJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  '@id': `${canonical}#work`,
+  name: data.title,
+  description: data.metaDescription,
+  url: canonical,
+  author: {
+    '@type': 'Person',
+    '@id': `${siteUrl}#gabriel-miro`,
+    name: 'Gabriel Miro',
+    jobTitle: 'Senior Full-Stack Engineer',
+  },
+  about: data.category,
+  keywords: data.stack.join(', '),
+  dateCreated: data.period,
+  position: data.role,
+};
+---
+
+<BaseLayout
+  title={`${data.title} — Gabriel Miro`}
+  description={data.metaDescription}
+  path={`/projects/${project.id}`}
+  ogImage={`/og/${project.id}.svg`}
+  sky={data.sky.theme}
+>
+  <article class="project-page scene-content">
+    <header class="scene-header">
+      <p class="ink-eyebrow">{data.category}</p>
+      <h1 id={`project-title-${project.id}`} class="ink-title">{data.title}</h1>
+      <ul class="scene-meta-tags" aria-label="Project metadata">
+        <li><span class="ink-tag">{data.period}</span></li>
+        <li><span class="ink-tag">{data.role}</span></li>
+        <li><span class="ink-tag">{data.team}</span></li>
+        <li><span class="ink-tag">{data.status}</span></li>
+      </ul>
+    </header>
+
+    <section class="ink-card">
+      <h2 class="ink-card__title">The context</h2>
+      <p class="ink-card__body">{data.context}</p>
+    </section>
+
+    <section class="ink-card">
+      <h2 class="ink-card__title">My role</h2>
+      <p class="ink-card__body">{data.myRole}</p>
+    </section>
+
+    <section class="ink-card">
+      <h2 class="ink-card__title">What I built</h2>
+      <ul class="ink-card__list">
+        {data.whatIBuilt.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    <section class="ink-card">
+      <h2 class="ink-card__title">Tech stack</h2>
+      <ul class="ink-chip-grid">
+        {
+          data.stack.map((slug) => (
+            <li>
+              <span class="ink-chip ink-chip--with-icon">
+                <img
+                  src={`https://api.iconify.design/simple-icons/${slug}.svg?color=%231A1613`}
+                  alt=""
+                  width="16"
+                  height="16"
+                  loading="lazy"
+                  onerror="this.style.display='none'"
+                />
+                {slug}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="scene-impact">
+      <h2 class="ink-card__title scene-impact__title">Impact</h2>
+      <ul class="ink-stat-grid">
+        {
+          data.impactStats.map((stat) => (
+            <li class="ink-stat-card">
+              <p class="ink-stat-label">{stat.label}</p>
+              <p class="ink-stat">{stat.value}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </article>
+
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(projectJsonLd)}
+  />
+</BaseLayout>

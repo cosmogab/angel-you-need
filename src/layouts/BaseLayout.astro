@@ -1,0 +1,51 @@
+---
+import '~/styles/global.css';
+import Head from '~/components/astro/Head.astro';
+import Nav from '~/components/astro/Nav.astro';
+import Footer from '~/components/astro/Footer.astro';
+import type { SkyTheme } from '~/types/project';
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  ogImage?: string;
+  /** Apply a per-project sky theme to <html data-sky="..."> on first render. */
+  sky?: SkyTheme;
+  /** Hide the footer on immersive pages like the sky map. */
+  hideFooter?: boolean;
+  /** Include Person + WebSite JSON-LD (home only). */
+  includeHomeJsonLd?: boolean;
+}
+
+const {
+  title,
+  description,
+  path = Astro.url.pathname,
+  ogImage,
+  sky,
+  hideFooter = false,
+  includeHomeJsonLd = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-sky={sky}>
+  <head>
+    <Head
+      title={title}
+      description={description}
+      path={path}
+      ogImage={ogImage}
+      includeHomeJsonLd={includeHomeJsonLd}
+    />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    {!hideFooter && <Footer />}
+  </body>
+</html>

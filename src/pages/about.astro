@@ -1,0 +1,58 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About — Gabriel Miro"
+  description="Senior full-stack engineer with seven years helping SaaS products, APIs, and AI features take flight."
+  path="/about"
+>
+  <article class="about scene-content">
+    <header class="scene-header">
+      <p class="ink-eyebrow">About</p>
+      <h1 class="ink-title">Gabriel Miro</h1>
+    </header>
+
+    <section class="ink-card">
+      <p class="ink-card__body">
+        Senior full-stack engineer. Seven years helping SaaS products,
+        APIs, and AI features take flight.
+      </p>
+    </section>
+
+    <section class="ink-card">
+      <p class="ink-card__body">
+        Long-form biography arrives with the project content in a later
+        phase. For now, the sky is still clearing.
+      </p>
+    </section>
+
+    <section class="about-find" aria-label="Find me online">
+      <a
+        class="ink-chip ink-chip--with-icon"
+        href="https://www.linkedin.com/in/gabriel-miro-972b1a2b3"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="https://api.iconify.design/simple-icons/linkedin.svg?color=%231A1613"
+          alt=""
+          width="16"
+          height="16"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        />
+        LinkedIn
+      </a>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .about-find {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+</style>

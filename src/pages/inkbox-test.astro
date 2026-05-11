@@ -1,0 +1,51 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Button from '~/components/astro/ui/Button.astro';
+import Pill from '~/components/astro/ui/Pill.astro';
+import Tag from '~/components/astro/ui/Tag.astro';
+import Card from '~/components/astro/ui/Card.astro';
+import StatCard from '~/components/astro/ui/StatCard.astro';
+---
+
+<BaseLayout title="Inkbox test" description="Inkbox UI primitives test page (temporary).">
+  <section
+    style="padding: 40px; background: var(--cream); min-height: 100vh;"
+  >
+    <p class="ink-eyebrow" style="margin-bottom: 12px;">Buttons</p>
+    <div style="display: flex; gap: 10px; margin-bottom: 32px; flex-wrap: wrap;">
+      <Button>Open the sky</Button>
+      <Button>View project</Button>
+      <Button href="/">← Back</Button>
+    </div>
+
+    <p class="ink-eyebrow" style="margin-bottom: 12px;">Project card</p>
+    <Card>
+      <Tag>SaaS · 2023–2026</Tag>
+      <h2 class="ink-title" style="margin-top: 12px;">Told</h2>
+      <p class="ink-prose" style="margin-top: 10px;">
+        Conversational surveys embedded across thousands of client sites.
+      </p>
+      <div style="display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap;">
+        <Pill>TypeScript</Pill>
+        <Pill>React</Pill>
+        <Pill>GraphQL</Pill>
+        <Pill>MongoDB</Pill>
+      </div>
+    </Card>
+
+    <p class="ink-eyebrow" style="margin: 32px 0 12px;">Stats</p>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+      <StatCard label="Events / month" value="10M+" />
+      <StatCard label="Client sites" value="5K" />
+      <StatCard label="Devs led" value="3" />
+    </div>
+
+    <p class="ink-eyebrow" style="margin: 32px 0 12px;">
+      Sky-themed Tag (data-sky="told")
+    </p>
+    <div data-sky="told" style="display: flex; gap: 10px;">
+      <Tag>Per-project · sky-accent</Tag>
+      <Tag fill="var(--gabo-halo)">Override · halo gold</Tag>
+    </div>
+  </section>
+</BaseLayout>

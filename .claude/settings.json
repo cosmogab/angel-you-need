@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Applications/**)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --dump-dom http://localhost:4325/)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --enable-logging --log-level=0 --virtual-time-budget=5000 --dump-dom http://localhost:4325/)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --enable-logging --log-level=0 --virtual-time-budget=10000 --dump-dom http://localhost:4325/)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --enable-logging --log-level=0 --v=1 --virtual-time-budget=10000 --window-size=1400,900 --dump-dom http://localhost:4325/)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --virtual-time-budget=8000 --window-size=1400,900 --screenshot=/tmp/page.png http://localhost:4325/)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --virtual-time-budget=15000 --window-size=1920,1080 --screenshot=/tmp/page_sharp.png http://localhost:4327/)",
+      "Bash(python3 -c ' *)",
+      "WebFetch(domain:nullprogram.com)",
+      "WebFetch(domain:gamemaker.io)",
+      "WebFetch(domain:pixelnest.io)",
+      "WebFetch(domain:moonjump.com)"
+    ]
+  }
+}

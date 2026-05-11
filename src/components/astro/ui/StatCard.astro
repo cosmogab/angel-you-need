@@ -1,0 +1,14 @@
+---
+interface Props {
+  label: string;
+  value: string;
+  class?: string;
+}
+
+const { label, value, class: className = '' } = Astro.props;
+---
+
+<div class:list={['ink-stat-card', className]}>
+  <span class="ink-stat-label">{label}</span>
+  <div class="ink-stat">{value}</div>
+</div>

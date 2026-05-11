@@ -1,0 +1,51 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Lost in the sky — The Angel You Need"
+  description="This cloud drifted away. Drag the sky back home."
+  path="/404"
+>
+  <section class="notfound">
+    <p class="code font-display">404</p>
+    <h1>Gabo looks confused.</h1>
+    <p>This cloud drifted away.</p>
+    <p class="back">
+      <a href="/">← Drag the sky back home</a>
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    min-height: 80dvh;
+    display: grid;
+    place-items: center;
+    padding: 6rem 1.5rem;
+    text-align: center;
+  }
+  .code {
+    font-size: clamp(5rem, 14vw, 10rem);
+    line-height: 1;
+    margin: 0;
+    letter-spacing: 0.02em;
+    color: color-mix(in srgb, var(--ink) 80%, var(--sky-accent));
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    margin: 0.5rem 0 1rem;
+  }
+  .back a {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--cream);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 500;
+  }
+</style>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://theangelyouneed.com/sitemap-index.xml

@@ -1,0 +1,47 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <p>
+    <span class="mark" aria-hidden="true">✦</span>
+    Gabriel Miro — Senior Full-Stack Engineer
+  </p>
+  <p class="quiet">
+    <a href="mailto:gabriel.34.miro@gmail.com">gabriel.34.miro@gmail.com</a>
+    <span aria-hidden="true"> · </span>
+    <a
+      href="https://www.linkedin.com/in/gabriel-miro-972b1a2b3"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      LinkedIn
+    </a>
+    <span aria-hidden="true"> · </span>
+    <span>© {year} — hand-built with Astro, React, GSAP, and PIXI</span>
+  </p>
+</footer>
+
+<style>
+  .site-footer {
+    padding: 2rem 1.5rem 2.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+  .site-footer p {
+    margin: 0.25rem 0;
+  }
+  .mark {
+    font-family: var(--font-display);
+    color: var(--gabo-halo);
+    margin-right: 0.25rem;
+  }
+  .quiet {
+    opacity: 0.7;
+    font-size: 0.82rem;
+  }
+  .quiet a {
+    color: inherit;
+  }
+</style>

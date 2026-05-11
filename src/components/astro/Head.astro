@@ -1,0 +1,100 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  /** Absolute or site-relative path for canonical + OG. */
+  path?: string;
+  /** Path to OG image (absolute URL preferred). */
+  ogImage?: string;
+  /** When true, includes JSON-LD for Person + WebSite (home only). */
+  includeHomeJsonLd?: boolean;
+}
+
+const {
+  title,
+  description,
+  path = '/',
+  ogImage,
+  includeHomeJsonLd = false,
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const canonical = new URL(path, Astro.site ?? 'http://localhost').toString();
+const fullOgImage = ogImage
+  ? new URL(ogImage, Astro.site ?? 'http://localhost').toString()
+  : `${siteUrl}/og-default.svg`;
+
+const homeJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${siteUrl}#gabriel-miro`,
+      name: 'Gabriel Miro',
+      url: siteUrl,
+      jobTitle: 'Senior Full-Stack Engineer',
+      description:
+        'Senior full-stack engineer with 7+ years helping SaaS products, APIs, and AI features take flight.',
+      email: 'mailto:gabriel.34.miro@gmail.com',
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}#website`,
+      url: siteUrl,
+      name: 'The Angel You Need',
+      description: 'Interactive portfolio of Gabriel Miro — senior full-stack engineer.',
+      author: { '@id': `${siteUrl}#gabriel-miro` },
+      inLanguage: 'en',
+    },
+  ],
+};
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#7DC4F0" />
+<meta name="color-scheme" content="light" />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={fullOgImage} />
+<meta property="og:site_name" content="The Angel You Need" />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={fullOgImage} />
+
+<!-- Favicon (placeholder halo emoji until a proper one is drawn) -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- Yuji Syuku — brush-style Japanese display font for the kanji impact
+     transition (.kanji-puff). The latin display + body fonts are loaded
+     via @fontsource imports in global.css; this single Japanese face is
+     pulled from Google Fonts on demand to avoid adding a dependency. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap"
+  rel="stylesheet"
+/>
+
+{
+  includeHomeJsonLd && (
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(homeJsonLd)}
+    />
+  )
+}
