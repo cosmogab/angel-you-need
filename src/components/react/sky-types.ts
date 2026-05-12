@@ -19,11 +19,14 @@ export interface SkyProject {
     base: string;
     accent: string;
   };
-  context: string;
+  context: string[];
   myRole: string;
-  whatIBuilt: string[];
-  stack: string[];
-  impactStats: { value: string; label: string }[];
+  whatIBuilt: { title: string; detail: string }[];
+  techStack: { slug: string; label: string; note: string }[];
+  impact: { value: string; label: string }[];
+  clients?: string[];
+  tradeoff?: string;
+  links?: { label: string; url: string }[];
   ambient: string;
   metaDescription: string;
   href: string;

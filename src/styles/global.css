@@ -927,6 +927,63 @@ button {
   margin: 0;
 }
 
+/* Multi-paragraph .ink-card__body — restore spacing between stacked paragraphs
+   (used by the "context" section which now takes an array of paragraphs). */
+.ink-card__body + .ink-card__body {
+  margin-top: 0.85rem;
+}
+
+/* "What I built" — each deliverable is title (serif, bold) + detail (sans).
+   Used on both the static project page and the InteriorScene React island. */
+.built-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+.built-item__title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  margin: 0 0 0.2rem;
+  color: var(--ink);
+}
+.built-item__detail {
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  line-height: 1.55;
+  margin: 0;
+  color: var(--ink);
+}
+
+/* Tech stack with explanatory notes — chip on top, note underneath. */
+.tech-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.85rem;
+}
+.tech-item {
+  display: grid;
+  gap: 0.3rem;
+  align-content: start;
+}
+.tech-item__chip {
+  justify-self: start;
+}
+.tech-item__note {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  margin: 0;
+  color: var(--ink);
+  opacity: 0.78;
+}
+
 /* ==========================================================================
    Phase 5 — Intro cloud (landing tagline + home button + hint)
    ========================================================================== */

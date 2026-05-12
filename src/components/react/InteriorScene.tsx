@@ -116,7 +116,9 @@ export default function InteriorScene({ project, origin, onClose }: Props) {
 
         <section className="ink-card">
           <h2 className="ink-card__title">The context</h2>
-          <p className="ink-card__body">{project.context}</p>
+          {project.context.map((paragraph, i) => (
+            <p key={i} className="ink-card__body">{paragraph}</p>
+          ))}
         </section>
 
         <section className="ink-card">
@@ -126,21 +128,24 @@ export default function InteriorScene({ project, origin, onClose }: Props) {
 
         <section className="ink-card">
           <h2 className="ink-card__title">What I built</h2>
-          <ul className="ink-card__list">
+          <ul className="built-list">
             {project.whatIBuilt.map((item, i) => (
-              <li key={i}>{item}</li>
+              <li key={i} className="built-item">
+                <p className="built-item__title">{item.title}</p>
+                <p className="built-item__detail">{item.detail}</p>
+              </li>
             ))}
           </ul>
         </section>
 
         <section className="ink-card">
           <h2 className="ink-card__title">Tech stack</h2>
-          <ul className="ink-chip-grid">
-            {project.stack.map((slug) => (
-              <li key={slug}>
-                <span className="ink-chip ink-chip--with-icon">
+          <ul className="tech-grid">
+            {project.techStack.map((tech) => (
+              <li key={tech.slug} className="tech-item">
+                <span className="ink-chip ink-chip--with-icon tech-item__chip">
                   <img
-                    src={`https://api.iconify.design/simple-icons/${slug}.svg?color=%231A1613`}
+                    src={`https://api.iconify.design/simple-icons/${tech.slug}.svg?color=%231A1613`}
                     alt=""
                     width="16"
                     height="16"
@@ -149,8 +154,9 @@ export default function InteriorScene({ project, origin, onClose }: Props) {
                       e.currentTarget.style.display = 'none';
                     }}
                   />
-                  {slug}
+                  {tech.label}
                 </span>
+                <p className="tech-item__note">{tech.note}</p>
               </li>
             ))}
           </ul>
@@ -159,7 +165,7 @@ export default function InteriorScene({ project, origin, onClose }: Props) {
         <section className="scene-impact">
           <h2 className="ink-card__title scene-impact__title">Impact</h2>
           <ul className="ink-stat-grid">
-            {project.impactStats.map((stat, i) => (
+            {project.impact.map((stat, i) => (
               <li key={i} className="ink-stat-card">
                 <p className="ink-stat-label">{stat.label}</p>
                 <p className="ink-stat">{stat.value}</p>
@@ -167,6 +173,46 @@ export default function InteriorScene({ project, origin, onClose }: Props) {
             ))}
           </ul>
         </section>
+
+        {project.clients && project.clients.length > 0 && (
+          <section className="ink-card">
+            <h2 className="ink-card__title">Trusted by</h2>
+            <ul className="ink-chip-grid">
+              {project.clients.map((client) => (
+                <li key={client}>
+                  <span className="ink-chip">{client}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {project.tradeoff && (
+          <section className="ink-card">
+            <h2 className="ink-card__title">The trade-off</h2>
+            <p className="ink-card__body">{project.tradeoff}</p>
+          </section>
+        )}
+
+        {project.links && project.links.length > 0 && (
+          <section className="ink-card">
+            <h2 className="ink-card__title">Links</h2>
+            <ul className="ink-chip-grid">
+              {project.links.map((link) => (
+                <li key={link.url}>
+                  <a
+                    className="ink-chip"
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </article>
     </section>
   );

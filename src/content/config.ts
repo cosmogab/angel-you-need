@@ -31,16 +31,31 @@ const projects = defineCollection({
       accent: hexColor,
     }),
 
-    /** Short paragraph describing why the project existed. */
-    context: z.string(),
+    /** Paragraphs describing why the project existed. */
+    context: z.array(z.string()).min(1),
     /** Short paragraph describing what Gabriel owned. */
     myRole: z.string(),
-    /** Bulleted list of concrete deliverables. */
-    whatIBuilt: z.array(z.string()).min(1),
-    /** Simple Icons slugs — render via CDN. */
-    stack: z.array(z.string()).min(1),
+    /** Concrete deliverables, each with a heading and detail paragraph. */
+    whatIBuilt: z
+      .array(
+        z.object({
+          title: z.string(),
+          detail: z.string(),
+        })
+      )
+      .min(1),
+    /** Tech stack — slug drives the Simple Icons CDN icon. */
+    techStack: z
+      .array(
+        z.object({
+          slug: z.string(),
+          label: z.string(),
+          note: z.string(),
+        })
+      )
+      .min(1),
     /** 1-4 display-size stat blocks. */
-    impactStats: z
+    impact: z
       .array(
         z.object({
           value: z.string(),
@@ -49,6 +64,19 @@ const projects = defineCollection({
       )
       .min(1)
       .max(4),
+    /** Optional list of client logos / names to surface as "Trusted by". */
+    clients: z.array(z.string()).optional(),
+    /** Optional trade-off paragraph explaining the project's main constraint. */
+    tradeoff: z.string().optional(),
+    /** Optional outbound links (live site, repo, case study). */
+    links: z
+      .array(
+        z.object({
+          label: z.string(),
+          url: z.string().url(),
+        })
+      )
+      .optional(),
 
     /** Hand-placed coordinates on the 16000x11200 sky map. */
     position: z.object({
