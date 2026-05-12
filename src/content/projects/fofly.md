@@ -6,7 +6,7 @@ role: Founder (solo)
 team: Solo
 status: Live, shipping
 sky:
-  theme: fofly-api
+  theme: fofly
   description: tech deep blue with stars and data-viz cloud accents
   base: '#1E3A7A'
   accent: '#FFC947'

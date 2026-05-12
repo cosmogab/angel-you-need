@@ -5,7 +5,7 @@ export const ISLANDS = {
   evolt: lazy(() => import('./IslandEvolt')),
   cosmodinos: lazy(() => import('./IslandCosmodinos')),
   eveia: lazy(() => import('./IslandEveia')),
-  'fofly-api': lazy(() => import('./IslandFoflyApi')),
+  fofly: lazy(() => import('./IslandFofly')),
   'culture-relax': lazy(() => import('./IslandCultureRelax')),
 } as const;
 

@@ -119,7 +119,7 @@
 [data-sky='evolt']         { --sky-base: #5BA3E0; --sky-accent: #2D6FAF; }
 [data-sky='cosmodinos']    { --sky-base: #2E1B5C; --sky-accent: #9B5FE0; }
 [data-sky='eveia']         { --sky-base: #7ED8B0; --sky-accent: #3FB085; }
-[data-sky='fofly-api']     { --sky-base: #1E3A7A; --sky-accent: #FFC947; }
+[data-sky='fofly']         { --sky-base: #1E3A7A; --sky-accent: #FFC947; }
 
 /* --- Base element styles ------------------------------------------------- */
 * {

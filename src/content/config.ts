@@ -24,7 +24,7 @@ const projects = defineCollection({
         'evolt',
         'cosmodinos',
         'eveia',
-        'fofly-api',
+        'fofly',
       ]),
       description: z.string(),
       base: hexColor,
