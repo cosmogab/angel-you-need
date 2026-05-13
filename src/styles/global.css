@@ -327,6 +327,17 @@ button {
   }
 }
 
+/* Mobile: shrink islands so a whole cloud fits within a phone viewport
+   without horizontal overflow. Label shrinks in step with the silhouette. */
+@media (max-width: 640px) {
+  .island-marker__svg {
+    width: 280px;
+  }
+  .island-marker__label {
+    font-size: clamp(1rem, 4.2vw, 1.4rem);
+  }
+}
+
 /* --- Mini-map ----------------------------------------------------------- */
 .mini-map {
   position: fixed;
@@ -340,6 +351,8 @@ button {
   box-shadow: var(--ink-shadow-md);
   display: grid;
   gap: 0.25rem;
+  cursor: pointer; /* the cream frame is itself a tap target: expand toggle */
+  transition: transform 420ms var(--ease-cloud);
 }
 .mini-map__title {
   margin: 0;
@@ -352,18 +365,67 @@ button {
 }
 .mini-map svg {
   display: block;
+  width: 220px;
+  height: 154px;
   border-radius: var(--radius-sharp);
   cursor: crosshair;
   border: var(--ink-border) solid var(--ink);
   background: var(--sky-base);
+  transition: width 420ms var(--ease-cloud), height 420ms var(--ease-cloud);
+}
+.mini-map__dot {
+  cursor: pointer;
+}
+.mini-map__dot:hover circle:first-child,
+.mini-map__dot:focus-visible circle:first-child {
+  stroke-width: 2;
+}
+
+/* Expanded: grow the SVG and translate the container so its center lands
+   near the viewport center. The translate values are computed in JS (see
+   MiniMap.tsx) and pushed as --center-tx / --center-ty so the CSS
+   transition can run smoothly. */
+.mini-map[data-expanded='true'] {
+  transform: translate(var(--center-tx, 0px), var(--center-ty, 0px));
+  z-index: 11;
+}
+.mini-map[data-expanded='true'] svg {
+  width: min(560px, 88vw);
+  height: calc(min(560px, 88vw) * 0.7);
+}
+
+/* Backdrop: dimmed overlay that captures taps outside the expanded map. */
+.mini-map-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  background: color-mix(in srgb, var(--ink) 25%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 420ms var(--ease-cloud);
+}
+.mini-map-backdrop[data-visible='true'] {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 @media (max-width: 640px) {
-  .mini-map {
+  /* Compact-corner scale stays for the collapsed state only — when
+     expanded the JS-driven translate takes over and would conflict
+     with this transform. */
+  .mini-map:not([data-expanded='true']) {
     right: 0.5rem;
     bottom: 0.5rem;
     transform: scale(0.82);
     transform-origin: bottom right;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mini-map,
+  .mini-map svg,
+  .mini-map-backdrop {
+    transition: none;
   }
 }
 
@@ -1052,6 +1114,44 @@ button {
 }
 .intro-cloud__hint em {
   font-style: italic;
+}
+
+/* Coarse pointer + narrow viewport: tuck the hint just under the subtitle
+   instead of below Gabo, so it reads as part of the tagline block. Match
+   the breakpoint used by useIsMobile (src/lib/use-is-mobile.ts). */
+@media (pointer: coarse) and (max-width: 900px) {
+  .intro-cloud__hint {
+    top: -150px;
+  }
+}
+
+/* Contextual land hint: floats above the nearest project island when Gabo
+   coasts to a stop in range. Reuses the look of the intro hold-hint. */
+.land-hint {
+  position: absolute;
+  transform: translate(-50%, -100%) translateY(-72px);
+  width: max-content;
+  max-width: min(420px, 70vw);
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: clamp(0.9rem, 1.6vw, 1rem);
+  color: color-mix(in srgb, var(--ink) 75%, transparent);
+  margin: 0;
+  pointer-events: none;
+  z-index: 3;
+  animation: land-hint-fade 5000ms var(--ease-cloud) both;
+}
+.land-hint em {
+  font-style: italic;
+}
+@keyframes land-hint-fade {
+  0%   { opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .land-hint { animation: none; opacity: 1; }
 }
 
 /* Mini-map home marker: gold halo disc + central dot, stands apart from

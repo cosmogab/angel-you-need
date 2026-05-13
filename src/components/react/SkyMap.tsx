@@ -75,7 +75,12 @@ export default function SkyMap({ projects }: Props) {
     setState: setAngelState,
     startMischief,
   } = useAngelState('idle-home');
-  const [hintVisible, setHintVisible] = useState(true);
+  const [hintVisible, setHintVisible] = useState(false);
+  // Single-use teaching flag: once the visitor has actually held to seek,
+  // the hold-hint never reappears for the session.
+  const hasSeekedRef = useRef(false);
+  // Contextual "click the cloud" hint, keyed by the nearest project slug.
+  const [landHint, setLandHint] = useState<{ slug: string } | null>(null);
 
   // --- Press-and-hold seek ------------------------------------------------
   // Pointerdown on the sky starts a continuous seek: Gabo moves toward the
@@ -373,6 +378,14 @@ export default function SkyMap({ projects }: Props) {
     s.heldFor = 0;
     if (s.rafId) cancelAnimationFrame(s.rafId);
     s.rafId = requestAnimationFrame(seekFrame);
+
+    // First real seek: retire the hold-hint for the rest of the session.
+    if (!hasSeekedRef.current) {
+      hasSeekedRef.current = true;
+      setHintVisible(false);
+    }
+    // Starting a new seek invalidates any active land hint.
+    setLandHint(null);
   };
 
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -399,6 +412,22 @@ export default function SkyMap({ projects }: Props) {
       s.rafId = 0;
     }
     setAngelState('idle-home');
+
+    // If Gabo coasted to a stop near a project island, surface the
+    // contextual "click the cloud" hint. 600px ≈ island marker's halo.
+    const p = angelPosRef.current;
+    let nearest: SkyProject | null = null;
+    let bestDist = Infinity;
+    for (const proj of sortedProjects) {
+      const d = Math.hypot(proj.position.x - p.x, proj.position.y - p.y);
+      if (d < bestDist) {
+        bestDist = d;
+        nearest = proj;
+      }
+    }
+    if (nearest && bestDist < 600) {
+      setLandHint({ slug: nearest.id });
+    }
   };
 
   // --- Wheel pan -----------------------------------------------------------
@@ -480,22 +509,34 @@ export default function SkyMap({ projects }: Props) {
     startMischief('wave');
   }, [startMischief]);
 
-  // --- Hint lifecycle: fade after 4s of inactivity or first interaction ---
+  // --- Hint lifecycle: reveal after 4s if visitor is still at home and
+  // hasn't started a seek yet. Hidden the moment a real seek begins
+  // (see onPointerDown), never reappears for the session.
   useEffect(() => {
-    if (!hintVisible) return;
-    const hide = () => setHintVisible(false);
-    const timer = window.setTimeout(hide, 4000);
-    const opts = { once: true } as const;
-    window.addEventListener('pointerdown', hide, opts);
-    window.addEventListener('keydown', hide, opts);
-    window.addEventListener('wheel', hide, opts);
-    return () => {
-      window.clearTimeout(timer);
-      window.removeEventListener('pointerdown', hide);
-      window.removeEventListener('keydown', hide);
-      window.removeEventListener('wheel', hide);
-    };
-  }, [hintVisible]);
+    const id = window.setTimeout(() => {
+      if (!hasSeekedRef.current) setHintVisible(true);
+    }, 4000);
+    return () => window.clearTimeout(id);
+  }, []);
+
+  // Defense in depth: if Gabo leaves home for any reason (nav click, popstate,
+  // mischief tween), drop the hint immediately.
+  useEffect(() => {
+    if (angelState !== 'idle-home') setHintVisible(false);
+  }, [angelState]);
+
+  // Auto-clear the land hint after 5s; also clear if Gabo starts moving
+  // again (user chose to ignore it) or parks (they took the action).
+  useEffect(() => {
+    if (!landHint) return;
+    const id = window.setTimeout(() => setLandHint(null), 5000);
+    return () => window.clearTimeout(id);
+  }, [landHint]);
+  useEffect(() => {
+    if (angelState === 'traveling' || angelState === 'parked') {
+      setLandHint(null);
+    }
+  }, [angelState]);
 
   // --- Cleanup any live seek rAF on unmount -------------------------------
   useEffect(() => {
@@ -557,6 +598,18 @@ export default function SkyMap({ projects }: Props) {
         {sortedProjects.map((p) => (
           <IslandMarker key={p.id} project={p} onOpen={onIslandOpen} />
         ))}
+        {landHint && (() => {
+          const proj = projects.find((p) => p.id === landHint.slug);
+          if (!proj) return null;
+          return (
+            <p
+              className="land-hint"
+              style={{ left: `${proj.position.x}px`, top: `${proj.position.y}px` }}
+            >
+              <em>Click the cloud to land</em>
+            </p>
+          );
+        })()}
         <AngelSystem
           position={angelPosition}
           state={angelState}
@@ -578,6 +631,7 @@ export default function SkyMap({ projects }: Props) {
         viewport={viewport}
         home={SKY_CENTER}
         onRecenter={(pos) => flyToPoint(pos)}
+        onOpenIsland={flyToIsland}
       />
       {overlayProject && (
         <Suspense fallback={null}>

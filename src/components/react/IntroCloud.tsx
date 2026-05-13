@@ -27,7 +27,7 @@ export default function IntroCloud({ hintVisible }: Props) {
       </div>
 
       <p className="intro-cloud__hint" data-visible={hintVisible}>
-        <em>Drag the sky to explore. Click a cloud to land.</em>
+        <em>Press &amp; hold to send me flying</em>
       </p>
     </div>
   );
