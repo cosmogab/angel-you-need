@@ -15,7 +15,6 @@ const onProjectPage = currentPath.startsWith('/projects/');
       href="/"
       class="ink-chip brand"
       aria-label="The Angel You Need — home"
-      aria-current={currentPath === '/' ? 'page' : undefined}
     >
       <span class="brand-mark" aria-hidden="true">✦</span>
       <span class="brand-text">The Angel You Need</span>
@@ -134,10 +133,11 @@ const onProjectPage = currentPath.startsWith('/projects/');
 
   /* Active state — fill with the per-project sky accent (or default
      --sky-accent on home/about/contact). Keeps the ink border and hard
-     shadow; just swaps the surface color so the chip reads as "current". */
+     shadow; just swaps the surface color so the chip reads as "current".
+     Brand is intentionally excluded: it's the logo, its destination is
+     self-evident, and the accent fill on home was reading as "white". */
   .nav-links .ink-chip[aria-current='page'],
-  .nav-links .ink-chip[data-current='page'],
-  .brand[aria-current='page'] {
+  .nav-links .ink-chip[data-current='page'] {
     background: var(--sky-accent);
   }
 
@@ -228,6 +228,17 @@ const onProjectPage = currentPath.startsWith('/projects/');
     .nav-links .ink-chip {
       font-size: 0.78rem;
       padding: 5px 9px;
+    }
+    /* Anchor the dropdown to .site-nav (next positioned ancestor) so it
+       spans the viewport width minus the nav's side padding, instead of
+       overflowing off-screen from the Projects chip's right edge. */
+    .project-index {
+      position: static;
+    }
+    .project-index[open] > .project-panel {
+      right: 1rem;
+      left: 1rem;
+      min-width: 0;
     }
   }
 </style>
