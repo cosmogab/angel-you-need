@@ -57,8 +57,8 @@ links:
   - label: cosmodinos.com
     url: https://cosmodinos.com
 position:
-  x: 5600
-  y: 9600
+  x: 2000
+  y: 7000
 order: 5
 ambient: eth-symbols
 metaDescription: 'Cosmodinos — a Web3 NFT marketplace with custom Solidity contracts, shipped solo to 10K+ users and 3K ETH volume.'

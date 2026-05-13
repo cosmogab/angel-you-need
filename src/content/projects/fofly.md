@@ -53,8 +53,8 @@ links:
   - label: fofly.com
     url: https://fofly.com
 position:
-  x: 13600
-  y: 9600
+  x: 14000
+  y: 6000
 order: 6
 ambient: tiny-planes
 metaDescription: 'Fofly — a personalized pre-flight report and mobile companion for people with a fear of flying, aggregating three aviation data sources.'

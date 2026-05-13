@@ -75,8 +75,8 @@ links:
   - label: eveia.io
     url: https://www.eveia.io
 position:
-  x: 14000
-  y: 6000
+  x: 13600
+  y: 9600
 order: 4
 ambient: heartbeat-pulse
 metaDescription: 'Eveia — a connected health product with a React Native mobile app, back-office, and wearable integrations, led end-to-end.'

@@ -58,8 +58,8 @@ links:
   - label: culture-relax.org
     url: https://culture-relax.org
 position:
-  x: 2000
-  y: 7000
+  x: 5600
+  y: 9600
 order: 3
 ambient: drifting-leaves
 metaDescription: 'Culture-Relax — modernized a cultural accessibility platform serving 400K+ monthly visits, with a zero-downtime Strapi migration.'
